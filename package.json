@@ -18,11 +18,18 @@
   "homepage": "https://github.com/Mukits/Chat-application#readme",
   "dependencies": {
     "body-parser": "^1.20.2",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.1.2",
+    "cookie-parser": "^1.4.6",
     "dependable": "^1.1.0",
     "ejs": "^3.1.8",
-    "express": "^4.18.2",
-    "express-promise-router": "^4.1.1",
+    "express": "^4.15.3",
+    "express-promise-router": "^2.0.0",
+    "express-session": "^1.15.4",
+    "express-validator": "^3.2.1",
     "lodash": "^4.17.21",
-    "nodemon": "^2.0.20"
+    "mongoose": "^6.10.0",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0"
   }
 }
