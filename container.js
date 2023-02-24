@@ -7,7 +7,6 @@ const simpleDependencies = [
     ['_','lodash']
 
 
-
 ];
 
 simpleDependencies.forEach(function(val){
