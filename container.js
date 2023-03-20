@@ -3,24 +3,40 @@ const path = require('path');
 
 const container = dependable.container();
 
-const simpleDependencies = [
-    ['_','lodash']
-
-
+const simpleDependecies = [
+    ['_', 'lodash'],
+    ['passport', 'passport'],
+    ['Users', './models/user'],
+    ['validator', 'express-validator']
 ];
 
-simpleDependencies.forEach(function(val){
-    container.register(val[0],function(){
-        return require(val[1]);
-    })
+simpleDependecies.forEach(function(val){
+   container.register(val[0], function(){
+       return require(val[1]);
+   }) 
 });
 
-const _ = require('lodash');
-container.load(path.join(__dirname,'/controllers'));
-container.load(path.join(__dirname,'/helpers'));
+container.load(path.join(__dirname, '/controllers'));
+container.load(path.join(__dirname, '/helpers'));
 
-container.register('container',function(){
-return container;
-
+container.register('container', function(){
+    return container;
 });
+
 module.exports = container;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
