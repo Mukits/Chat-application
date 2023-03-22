@@ -84,9 +84,10 @@ module.exports = function(_, passport, User, validator){
             failureRedirect: '/signup',
             failureFlash: true
         }),
-        
+        // call back route if authenticate success then user will be taken to homepage
         facebookLogin: passport.authenticate('facebook', {
             successRedirect: '/home',
+            // if authentication fails go back to signup
             failureRedirect: '/signup',
             failureFlash: true
         })

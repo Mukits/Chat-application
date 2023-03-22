@@ -1,2 +1,3 @@
+# we dont want those files to be pushed to the repository
 /node_modules
 /secret
