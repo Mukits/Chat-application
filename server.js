@@ -16,7 +16,7 @@ const helmet = require('helmet');
 
 const container = require('./container');
 
-container.resolve(function(users, _){
+container.resolve(function(users, _, admin){
     
     mongoose.set('useFindAndModify', false);
     mongoose.set('useCreateIndex', true);
@@ -42,7 +42,7 @@ container.resolve(function(users, _){
         //Setup router
         const router = require('express-promise-router')();
         users.SetRouting(router);
-        
+        admin.SetRouting(router);
 
         app.use(router);
         
