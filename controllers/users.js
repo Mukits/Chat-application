@@ -31,7 +31,7 @@ module.exports = function(_, passport, User, validator){
         
         indexPage: function(req, res){
             const errors = req.flash('error');
-            return res.render('index', {title: 'Footballkk | Login', messages: errors, hasErrors: errors.length > 0});
+            return res.render('index', {title: 'ChatApplication | Login', messages: errors, hasErrors: errors.length > 0});
         },
         
         postLogin: passport.authenticate('local.login', {
@@ -42,7 +42,7 @@ module.exports = function(_, passport, User, validator){
         
         getSignUp: function(req, res){
             const errors = req.flash('error');
-            return res.render('signup', {title: 'Footballkk | SignUp', messages: errors, hasErrors: errors.length > 0});
+            return res.render('signup', {title: 'ChatApplication | SignUp', messages: errors, hasErrors: errors.length > 0});
         },
 
         postValidation: function(req, res, next) {
@@ -76,7 +76,7 @@ module.exports = function(_, passport, User, validator){
         }),
         //using URLs  to request permission before the user can signup or
         getGoogleLogin: passport.authenticate('google', {
-            scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.profile.emails.read']
+            scope: ['profile','email']
         }),
         
         googleLogin: passport.authenticate('google', {
