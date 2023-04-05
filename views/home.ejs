@@ -92,6 +92,7 @@
                             <% _.forEach(val, function(val2){%>
                             <form action="#" method="post" id="add-fav">
                                 <div class="item col-md-4">
+                                    <a href="/group/<%= val2.name %>">
                                     <div class="thumbnail">
                                        <img src="https://chatapplicationmukitur.s3.amazonaws.com/<%= val2.image %>" alt="image">
                                         <div class="caption">
@@ -112,6 +113,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                </a>
                                 </div>
                             </form>
                             <% })%>

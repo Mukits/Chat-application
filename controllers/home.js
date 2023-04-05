@@ -37,10 +37,11 @@ module.exports = function(async,group,_){
                     // pushes the res1 into the dataBlock array and will slice (cut the res1 data into block of 1-3)
                     dataBlock.push(res1.slice(i,i+blockSize))
                 }
-                
+                // SORTING FILTER OPTIONS ALPHABETICALLY
+                const sortByCountry = _.sortBy(res2,"_id");
                 //console.log(dataBlock);
                 // console.log(res1);
-                res.render('home', {title: 'Chat-application - Home', data: dataBlock, country: res2});
+                res.render('home', {title: 'Chat-application - Home', data: dataBlock, country: sortByCountry});
             })
             
         }
