@@ -76,7 +76,7 @@ container.resolve(function(users, _, admin, home){
         
         app.use(passport.initialize());
         app.use(passport.session());
-        
+        // lodash is set as a global variable so it can be used in views
         app.locals._ = _;
         
     }

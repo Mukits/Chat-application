@@ -11,17 +11,54 @@ body {
 
 /* background color and other attributes for name of the application */
 .navbar-default .navbar-brand{
-    color: white;
+    color:#ffffff;
     font-size: 30px;
     font-weight: bold;
     text-decoration:none;
 }
-/* sets the hover attribute of the application name */
+/* sets the hover attribute of the application name !important will override all the other colors*/
 .navbar-brand:hover{
     color:#ffffff !important;
     background-color:#520e79 !important;
 
 }
+/* it will look for the class navbar default then navbar-nav and inside it would look for any > (child  element) of type anchor inside list  */
+.navbar-default .navbar-nav > li > a {
+    color:#ffffff !important;
+    background-color: #520e79 !important;
+    font-size: 16px;
+    font-weight: bold;
+
+}
+/* controls hover property of the members and dropdown buttons */
+.navbar-default .navbar-nav > li > a:hover {
+    color:#ffffff !important;
+    background-color: #520e79 !important;
+    
+
+}
+/* css for apply button */
+.add-apply{
+    background: #520e79;
+    width: 100%;
+    text-shadow: none;
+    color:#ffffff !important;
+    margin-top: 25px;
+    font-weight: bold;
+
+}
+/* css for add to favourite button  */
+.add-fav{
+    background: #520e79;
+    width: 100%;
+    text-shadow: none;
+    color:#ffffff !important;
+    font-weight: bold;
+    padding: 5px 2px 5px 2px;
+}
+
+
+
 #custom-search-input {
     background: #e8e6e7 none repeat scroll 0 0;
     margin: 0;

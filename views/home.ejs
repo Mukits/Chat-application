@@ -23,8 +23,6 @@
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-      </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Members</a></li>
         <li class="dropdown">
@@ -67,7 +65,8 @@
                                             FILTER
                                         </p>
                                         <hr/>
-                                        <select class="" name="country" id="country" >
+                                        <!-- uses bootstrap form control class -->
+                                        <select class="form-control" name="country" id="country" >
                                             <option value="">Filter By Country</option>
 											<option>England</option>
 											<option>Germany</option>
@@ -85,19 +84,22 @@
             
             <div class="col-md-9">
                 <div>
+                    <!-- gets the data array from the home.js and uses lodash simplified for each loop -->
+                    <% _.forEach(data, function(val){%>
                     <div class="category-list">
                         <div class="row">
+                            <% _.forEach(val, function(val2){%>
                             <form action="#" method="post" id="add-fav">
                                 <div class="item col-md-4">
                                     <div class="thumbnail">
-                                       <img alt="">
+                                       <img src="https://chatapplicationmukitur.s3.amazonaws.com/<%= val2.image %>" alt="image">
                                         <div class="caption">
-                                            <h4>Name</h4>
+                                            <h4><%= val2.name %></h4>
                                             
                                             <div class="row">
                                                 <div class="col-xs-12 col-md-6">
                                                     <p>
-                                                        Country
+                                                        <%= val2.country %>
                                                     </p>
                                                 </div>
                                                 
@@ -111,9 +113,11 @@
                                     </div>
                                 </div>
                             </form>
+                            <% })%>
                         </div>
+                      
                     </div>
-                    
+                    <% })%>
                 </div>
             </div>
         </div>

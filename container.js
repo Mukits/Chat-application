@@ -9,8 +9,10 @@ const simpleDependecies = [
     ['Users', './models/user'],
     ['validator', 'express-validator'],
     ['formidable','formidable'],
+    ['async','async'],
     ['group', './models/groups'],
     ['aws','./helpers/AWSUpload']
+
 ];
 
 simpleDependecies.forEach(function(val){
