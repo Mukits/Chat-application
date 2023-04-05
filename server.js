@@ -15,8 +15,8 @@ const helmet = require('helmet');
 
 
 const container = require('./container');
-
-container.resolve(function(users, _, admin, home){
+//parameters are the controllers we are creating
+container.resolve(function(users, _, admin, home, groupcht){
     
     mongoose.set('useFindAndModify', false);
     mongoose.set('useCreateIndex', true);
@@ -44,6 +44,7 @@ container.resolve(function(users, _, admin, home){
         users.SetRouting(router);
         admin.SetRouting(router);
         home.SetRouting(router);
+        groupcht.SetRouting(router);
         app.use(router);
         
         app.use(function(req, res){
