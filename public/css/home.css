@@ -4,7 +4,24 @@ body {
     color: #555;
     background: #eeeeee;
 }
+/* background color for main navbar */
+.navbar {
+    background-color:#520e79;
+}
 
+/* background color and other attributes for name of the application */
+.navbar-default .navbar-brand{
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration:none;
+}
+/* sets the hover attribute of the application name */
+.navbar-brand:hover{
+    color:#ffffff !important;
+    background-color:#520e79 !important;
+
+}
 #custom-search-input {
     background: #e8e6e7 none repeat scroll 0 0;
     margin: 0;
@@ -57,7 +74,7 @@ body {
 }
 
 .input-btn {
-    background: #4aa1f3;
+    background: #520e79;
     border-top-right-radius: 25px !important;
     border-bottom-right-radius: 25px !important;
     padding-left: 23px;
