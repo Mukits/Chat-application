@@ -68,9 +68,10 @@
                                         <!-- uses bootstrap form control class -->
                                         <select class="form-control" name="country" id="country" >
                                             <option value="">Filter By Country</option>
-											<option>England</option>
-											<option>Germany</option>
-											<option>France</option>
+                                            <!-- uses the country array inside home.js to display filtering options -->
+											<% _.forEach(country,function(val) {%>
+                                                <option value="<%=val._id %>"><%=val._id %></option>
+                                            <% })%>
                                         </select>
                                         <div class="clearfix"></div>
                                         <button class="btn add-apply">Apply</button>

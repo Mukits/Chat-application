@@ -10,10 +10,25 @@ module.exports = function(async,group,_){
                     group.find({},(err,result)=>{
                         callback(err,result);
                     })
+                },
+
+                
+
+                function(callback){
+                    // searches the group table for values only with the country
+                    group.aggregate([{
+                        $group: {
+                            _id: "$country"
+                        }
+                    }], (err, newResult) => {
+                       callback(err, newResult) ;
+                    });
                 }
                 
             ],(err,results)=>{
                 const res1 = results[0];
+                const res2 = results[1];
+                console.log(res2);
                 // every three results they will be put in the arrays
                 const dataBlock = [];
                 // 3 DATA INSIDE EACH ARRAY
@@ -25,7 +40,7 @@ module.exports = function(async,group,_){
                 
                 //console.log(dataBlock);
                 // console.log(res1);
-                res.render('home', {title: 'Chat-application - Home', data: dataBlock});
+                res.render('home', {title: 'Chat-application - Home', data: dataBlock, country: res2});
             })
             
         }
