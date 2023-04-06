@@ -7,6 +7,10 @@ $(document).ready(function(){
         console.log('user connected successfully')
     });
 
+    socket.on('newData',function(data){
+        console.log(data);
+    });
+
     $('#message-form').on('submit',function(e){
         // to prevent the form to reload after its submitted
         e.preventDefault();

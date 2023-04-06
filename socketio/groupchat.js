@@ -6,6 +6,10 @@ module.exports = function(io){
         //getting the event from a particular socket / listens to the newMessage event from the client side
         socket.on('newMessage',(message)=>{
             console.log(message)
+            //io.emit send the message to all the connected clients including the sender
+            io.emit('newData',{
+                text: message.text
+            });
         });
 
     });
