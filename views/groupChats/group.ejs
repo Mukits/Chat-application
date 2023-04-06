@@ -109,7 +109,8 @@
 
                             <div class="message_write">
                               <form id="message-form" method="post">
-
+                                <!-- gets the group name from the groupcht controller -->
+                                <input type="hidden" id ="name" value="<%= name %>">
                                   <textarea class="form-control" name="message" id="msg" placeholder="Type a message"></textarea>
                                   <div class="clearfix"></div>
                                   <div class="chat_bottom">

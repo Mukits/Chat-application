@@ -3,12 +3,19 @@ module.exports = function(io){
     io.on('connection',(socket)=>{
         //will be displayed on the console
         console.log('user connected');
+        socket.on('join',(params,callback)=>{
+            // it allows socket to join a particular channel
+            socket.join(params.room)
+
+            callback();
+        });
         //getting the event from a particular socket / listens to the newMessage event from the client side
         socket.on('newMessage',(message)=>{
             console.log(message)
-            //io.emit send the message to all the connected clients including the sender
-            io.emit('newData',{
-                text: message.text
+            //io.to().emit send the message to all the connected clients to a specific room including the sender
+            io.to(message.room).emit('newData',{
+                text: message.text,
+                room: message.room
             });
         });
 
