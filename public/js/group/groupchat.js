@@ -7,5 +7,14 @@ $(document).ready(function(){
         console.log('user connected successfully')
     });
 
-
+    $('#message-form').on('submit',function(e){
+        // to prevent the form to reload after its submitted
+        e.preventDefault();
+        //gets the msg value from the input field in group.ejs
+        var msg = $('#msg').val();
+        //adding anew event that will have to be listen on the server side as well
+        socket.emit('newMessage', {
+            text: msg
+        });
+    });
 });
