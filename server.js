@@ -8,7 +8,6 @@ const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const passport = require('passport');
-const socketIO = require('socket.io');
 const {Users} = require('./helpers/UsersClass');
 const compression = require('compression');
 const helmet = require('helmet');
@@ -28,13 +27,13 @@ container.resolve(function(users, _, admin, home, groupcht){
     function SetupExpress(){
         const app = express();
         const server = http.createServer(app);
-        const io = socketIO(server);
+        const io = require('socket.io')(server);
         server.listen(process.env.PORT || 3001, function(){
             console.log('Listening on port 3001');
         });
         ConfigureExpress(app);
         
-        // require('./socket/groupchat')(io, Users);
+        require('./socketio/groupchat')(io);
         // require('./socket/friend')(io);
         // require('./socket/globalroom')(io, Global, _);
         // require('./socket/privatemessage')(io);
