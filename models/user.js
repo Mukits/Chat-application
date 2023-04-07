@@ -11,18 +11,22 @@ const userSchema = mongoose.Schema({
     facebook: {type: String, default: ''},
     fbTokens: Array,
     google: {type: String, default: ''},
-    sentRequest: [{
+    // will contain the username of whomever the friend request is sent to its an object array
+    sentFriendRequest: [{
         username: {type: String, default: ''}
     }],
-    request: [{
+    // this field will contain the sender id and username its an object array
+    friendRequestSender: [{
         userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
         username: {type: String, default: ''}
     }],
+    // when the receiver accept the request, this field for both the receiver and sender will be updated
     friendsList: [{
         friendId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
         friendName: {type: String, default: ''}
     }],
-    totalRequest: {type: Number, default: 0},
+    // if user cancels a request its value will be reduced by o1 otherwise incremented by 1 if a new request is received
+    totalFriendRequest: {type: Number, default: 0},
     gender: {type: String, default: ''},
     country: {type: String, default: ''},
     mantra: {type: String, default: ''},

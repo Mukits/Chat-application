@@ -41,7 +41,7 @@ module.exports = function(async,group,_){
                 const sortByCountry = _.sortBy(res2,"_id");
                 //console.log(dataBlock);
                 // console.log(res1);
-                res.render('home', {title: 'Chat-application - Home', data: dataBlock, country: sortByCountry});
+                res.render('home', {title: 'Chat-application - Home', user:req.user, data: dataBlock, country: sortByCountry});
             })
             
         }

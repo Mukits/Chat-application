@@ -141,7 +141,7 @@
                                 <!-- gets the group name from the groupcht controller -->
                                 <input type="hidden" id ="name" value="<%= name %>">
                                 <!-- gets the username or fullname depending on which one is set, from the user -->
-                                <input type="hidden"  id ="sender" name="sender"  value="<%= user.username || user.fullname %>">
+                                <input type="hidden"  id ="sender" name="sender"  value="<%= user.username %>">
                                   <textarea class="form-control" name="message" id="msg" placeholder="Type a message"></textarea>
                                   <div class="clearfix"></div>
                                   <div class="chat_bottom">
@@ -177,12 +177,12 @@
                                 <div class="modal-content">
                                   <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h3 class="modal-title" id="name"></h3>
+                                    <h3 class="modal-title" id="member"></h3>
                                   </div>
                                   <div class="modal-body">
                                     <form action="" method="get" id="add_friend">
                                         <input type="hidden" name="receiverName" id="receiverName" value="">
-                                        <input type="hidden" name="sender-name" id="sender-name" value="">
+                                        <input type="hidden" name="sender-name" id="sender-name" value="<%= user.username %>">
                                         <button type="submit" id="friend-add" class="btn add"><i class="fa fa-user"></i> Add Friend</button>
                                         
                                         <a id="nameLink" class="btn ">View Profile</a>
@@ -218,13 +218,14 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>  
-<!-- client side library -->
-<script src="/socket.io/socket.io.js"></script>
 <!-- server side library -->
+<script src="/socket.io/socket.io.js"></script>
+<!--  Client side library -->
 <script src="/js/group/groupchat.js"></script>
 <!-- mustache used to render the chat message and name of the sender on the html page -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
-
+<!-- adds the library for the client side friendrequest -->
+<script src="/js/group/friendRequestSnd.js"></script>
 
 
 </body>

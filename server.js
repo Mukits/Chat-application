@@ -34,7 +34,7 @@ container.resolve(function(users, _, admin, home, groupcht){
         ConfigureExpress(app);
         
         require('./socketio/groupchat')(io, Users);
-        // require('./socket/friend')(io);
+        require('./socketio/friendRequestSnd')(io);
         // require('./socket/globalroom')(io, Global, _);
         // require('./socket/privatemessage')(io);
         
