@@ -1,17 +1,33 @@
 // Users is registered as a dependency in the container file
-module.exports = function(Users, async){
+module.exports = function (Users, async) {
     return {
-        SetRouting: function (router){
+        SetRouting: function (router) {
             router.get('/group/:groupName', this.groupPage);
             router.post('/group/:groupName', this.groupPagePost)
         },
         // function containing the render method which renders the view file groupChats/group
-        groupPage: function(req,res){
+        groupPage: function (req, res) {
             const name = req.params.groupName;
-            res.render('groupChats/group',{title: 'Chat-application - Group', user:req.user, name:name});
+            // when a user logs in their data in the database will be returned
+            async.parallel([
+                function (callback) {
+                    //it will search for user with username req.user.username
+                    Users.findOne({ 'username': req.user.username })
+                        // its going to then populate that user his data including requestReceived.userId
+                        .populate('requestReceived.userId')
+                        .exec((err, result) => {
+                            callback(err, result);
+                        })
+                }
+            ], (err, results) => {
+                const firstResult = results[0];
+                console.log(firstResult);
+                res.render('groupChats/group', { title: 'Chat-application - Group', user: req.user, name: name , data:firstResult});
+            });
+
         },
         // to post the data to the database from the groupPage friend request
-        groupPagePost: function(req,res){
+        groupPagePost: function (req, res) {
             // those two functions will run in parallel wihtout waiting ones finished
             async.parallel([
                 function (callback) {
@@ -41,25 +57,27 @@ module.exports = function(Users, async){
                     }
                 },
                 // this function updates the data for the sender (sentFriendRequest value)
-                function(callback){
-                    if(req.body.receiverName){
+                function (callback) {
+                    if (req.body.receiverName) {
                         Users.updateOne({
-                            // 
+
                             'username': req.user.username,
-                            'sentFriendRequest.username': {$ne: req.body.receiverName}
+                            'sentFriendRequest.username': { $ne: req.body.receiverName }
                         },
-                        {
-                            $push: {sentFriendRequest: {
-                                // stores the receivername
-                                username: req.body.receiverName
-                            }}    
-                        }, (err, count) => {
-                            callback(err, count);
-                        })
+                            {
+                                $push: {
+                                    sentFriendRequest: {
+                                        // stores the receivername
+                                        username: req.body.receiverName
+                                    }
+                                }
+                            }, (err, count) => {
+                                callback(err, count);
+                            })
                     }
                 }
             ], (err, results) => {
-                res.redirect('/group/'+req.params.name);
+                res.redirect('/group/' + req.params.name);
             });
         }
     }
