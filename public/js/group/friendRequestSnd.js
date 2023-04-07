@@ -8,10 +8,15 @@ $(document).ready(function(){
         }
         socket.emit('joinReq', params, function(){
             console.log('user has joined')
+           
+          
         });
     });
     socket.on('newFriendReq',function(friend){
         console.log(friend);
+         // using the jquery load which loads the data from the server and puts the returned data into the element where we specify the id
+        //  the space before #refresh is needed for it to work otherwise it will not load
+        $('#refresh').load(location.href + ' #refresh');
     });
     // added a submit event on the form
     $('#add_friend').on('submit',function(e){
