@@ -14,29 +14,31 @@ module.exports = function(Users, async){
         groupPagePost: function(req,res){
             // those two functions will run in parallel wihtout waiting ones finished
             async.parallel([
-            function(callback){
-                // this will only happens if the receiverName value inside group.ejs exists/has a value
-                   if(req.body.receiverName){
-                    // users is made global because added to container.js - updates Users
-                       Users.updateOne({
-                           'username': req.body.receiverName,
-                        //    ne = not equal notation for mongoDB - checks that the request does not already exists
-                           'requestReceived.userId': {$ne: req.user._id},
-                        //    checks that the sender is not already a friend
-                           'friendsList.friendId': {$ne: req.user._id}
-                       },
-                       {
-                        // pusheses the data into the database 
-                            $push: {requestReceived: {
-                                userId: req.user._id,
-                                username: req.user.username
-                            }},
-                            // increments the number of total requests by 1
-                            $inc: {totalFriendRequest: 1}
-                       }, (err, count) => {
-                           callback(err, count);
-                       })
-                   }
+                function (callback) {
+                    // this will only happens if the receiverName value inside group.ejs exists/has a value
+                    if (req.body.receiverName) {
+                        // users is made global because added to container.js - updates Users
+                        Users.updateOne({
+                            'username': req.body.receiverName,
+                            //    ne = not equal notation for mongoDB - checks that the request does not already exists
+                            'requestReceived.userId': { $ne: req.user._id },
+                            //    checks that the sender is not already a friend
+                            'friendsList.friendId': { $ne: req.user._id }
+                        },
+                            {
+                                // pusheses the data into the database 
+                                $push: {
+                                    requestReceived: {
+                                        userId: req.user._id,
+                                        username: req.user.username
+                                    }
+                                },
+                                // increments the number of total requests by 1
+                                $inc: { totalFriendRequest: 1 }
+                            }, (err, count) => {
+                                callback(err, count);
+                            })
+                    }
                 },
                 // this function updates the data for the sender (sentFriendRequest value)
                 function(callback){

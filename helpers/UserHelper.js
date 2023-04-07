@@ -27,10 +27,10 @@ class Users {
     GetUsersList(room){
         // for every room name that matches the parameter room will be added to a new array
         var users = this.users.filter((user) => {
-           return user.room === room;
+            return user.room === room;
         });
-        
-       
+
+
         // to get the names of every user inside the new array users above
         var namesArray = users.map((user) => {
             return user.name;

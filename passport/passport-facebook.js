@@ -22,14 +22,14 @@ passport.use(new FacebookStrategy({
     passReqToCallback: true
     
 }, (req, token, refreshToken, profile, done) => {
-    
-// searches for the user useing the profile id
-    User.findOne({facebook:profile.id}, (err, user) => {
-       if(err){
-           return done(err);
-       }
+
+    // searches for the user useing the profile id
+    User.findOne({ facebook: profile.id }, (err, user) => {
+        if (err) {
+            return done(err);
+        }
         // if the user already exists return the retrieved data
-        if(user){
+        if (user) {
             return done(null, user);
         // if use does not exist then create data for the new user
         }else{

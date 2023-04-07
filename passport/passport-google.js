@@ -22,16 +22,16 @@ passport.use(new GoogleStrategy({
     passReqToCallback: true
     //search from users table if the profile id is found in the database then dont create a new one
 }, function (req, accessToken, refreshToken, profile, done) {
-    User.findOne({google:profile.id}, (err, user) => {
-        if(err){
-           return done(err);
+    User.findOne({ google: profile.id }, (err, user) => {
+        if (err) {
+            return done(err);
         }
-        
-        if(user){
+
+        if (user) {
             return done(null, user);
             //if data not found already on database create a new user
-        }else{
-           
+        } else {
+
             const newUser = new User();
             newUser.google = profile.id;
             newUser.fullname = profile.displayName;

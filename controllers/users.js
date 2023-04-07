@@ -72,7 +72,7 @@ module.exports = function(_, passport, User, validator){
         }),
         
         getFacebookLogin: passport.authenticate('facebook', {
-           scope: 'email' 
+        scope: 'email' 
         }),
         //using URLs  to request permission before the user can signup or
         getGoogleLogin: passport.authenticate('google', {

@@ -12,16 +12,16 @@ module.exports = function(async,group,_){
                     })
                 },
 
-                
 
-                function(callback){
+
+                function (callback) {
                     // searches the group table for values only with the country
                     group.aggregate([{
                         $group: {
                             _id: "$country"
                         }
                     }], (err, newResult) => {
-                       callback(err, newResult) ;
+                        callback(err, newResult);
                     });
                 }
                 

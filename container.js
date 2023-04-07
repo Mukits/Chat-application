@@ -8,24 +8,24 @@ const simpleDependecies = [
     ['passport', 'passport'],
     ['Users', './models/user'],
     ['validator', 'express-validator'],
-    ['formidable','formidable'],
-    ['async','async'],
+    ['formidable', 'formidable'],
+    ['async', 'async'],
     ['group', './models/groups'],
-    ['aws','./helpers/AWSUpload'],
-    
+    ['aws', './helpers/AWSUpload'],
+
 
 ];
 
-simpleDependecies.forEach(function(val){
-   container.register(val[0], function(){
-       return require(val[1]);
-   }) 
+simpleDependecies.forEach(function (val) {
+    container.register(val[0], function () {
+        return require(val[1]);
+    })
 });
 
 container.load(path.join(__dirname, '/controllers'));
 container.load(path.join(__dirname, '/helpers'));
 
-container.register('container', function(){
+container.register('container', function () {
     return container;
 });
 
