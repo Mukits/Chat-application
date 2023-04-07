@@ -10,6 +10,8 @@ module.exports = function(io, Users){
             socket.join(params.room)
             // params are got from the client side version of groupchat.js in public folder
             members.AddUserData(socket.id,params.userName,params.room);
+            // io.to to sent to everyome socket.to to send to evryone apart from sender
+            io.to(params.room).emit('usersList', members.GetUsersList(params.room));
             console.log(members);
 
             callback();
@@ -25,6 +27,12 @@ module.exports = function(io, Users){
             });
             callback();
         });
-
+        // socket.io containts this disconnect event that, when user disconnects the member will be removed and list will be update using io.to (sends message to evryone including sender)
+        socket.on('disconnect', ()=>{
+            var member = members.RemoveUser(socket.id);
+            if(member){
+                io.to(members.room).emit('usersList', members.GetUsersList(member.room));
+            }
+        })
     });
 }

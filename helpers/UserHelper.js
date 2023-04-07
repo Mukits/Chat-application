@@ -8,7 +8,7 @@ class Users {
         this.users.push(users);
         return users;
     }
-    
+    // removes the user 
     RemoveUser(id){
         var user = this.GetUser(id);
         if(user){
@@ -16,7 +16,7 @@ class Users {
         }
         return user;
     }
-    
+    // gets the user connected to a specific socket
     GetUser(id){
         var getUser = this.users.filter((userId) => {
             return userId.id === id;

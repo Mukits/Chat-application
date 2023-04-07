@@ -18,6 +18,19 @@ $(document).ready(function(){
         });
 
     });
+    // to see the users that are connected 
+    socket.on('usersList',function(members){
+        console.log(members);
+        var ol = $('<ol></ol>');
+        for (var i = 0;i<members.length;i++){
+            ol.append('<p><a id="val" data-toggle="modal" data-target="#Modal">'+members[i]+'</a></p>');
+        }
+
+    // Online Members (dynamically added)
+    $('#numValue').text('('+members.length+')');
+        // to add the ordered list into the html in group.ejs
+        $('#users').html(ol);
+    });
 
     socket.on('newData',function(data){
         console.log(data);
