@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema({
         username: {type: String, default: ''}
     }],
     // this field will contain the sender id and username its an object array
-    friendRequestSender: [{
+    requestReceived: [{
         userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
         username: {type: String, default: ''}
     }],

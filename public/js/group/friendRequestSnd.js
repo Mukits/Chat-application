@@ -10,38 +10,33 @@ $(document).ready(function(){
             console.log('user has joined')
         });
     });
-    socket.on('newFriendReq',function(frien){
-        console.log(frien);
+    socket.on('newFriendReq',function(friend){
+        console.log(friend);
     });
     // added a submit event on the form
     $('#add_friend').on('submit',function(e){
         e.preventDefault();
         // get the receiver name from the receiverName input field
-        var receiver = $('#receiverName').val();
-        socket.emit('friendReq',{
-                        receiver: receiver,
-                        sender: sender
-                    }, function(){
-                        console.log('request has been sent successfully');
-                    })
+        var receiverName = $('#receiverName').val();
+        
                 
         // we are using the ajax method to post the data to the database 
-        // $.ajax({
-        //     url: '/group'+room,
-        //     type: 'POST',
-        //     // we are sending the receiver name and the senders name
-        //     data: {
-        //         receiver: receiver,
+        $.ajax({
+            url: '/group/'+room,
+            type: 'POST',
+            // we are sending the receiver name and the senders name
+            data: {
+                receiverName: receiverName,
                 
-        //     },
-        //     success: function(){
-        //         socket.emit('friendReq',{
-        //             receiver: receiver,
-        //             sender: sender
-        //         }, function(){
-        //             console.log('request has been sent successfully');
-        //         })
-        //     }
-        // })
-    });
+            },
+            success: function(){
+                socket.emit('friendReq',{
+                    receiver: receiverName,
+                    sender: sender
+                }, function(){
+                    console.log('request has been sent successfully');
+                })
+            }
+        })
+    })
 });

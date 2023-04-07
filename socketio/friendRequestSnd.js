@@ -10,8 +10,8 @@ module.exports = function(io){
 
         socket.on('friendReq', (friend,callback)=>{
             io.to(friend.receiver).emit('newFriendReq',{
-                from : friend.sender,
-                to : friend.receiver
+                sender : friend.sender,
+                receiver : friend.receiver
             });
             callback();
         });
