@@ -102,15 +102,46 @@
                                 <div class="pull-right">
                                 </div>
                             </div>
-
+                          
                             <div class="chat_area">
-                            
+                                <ul id = "messages" class= "list-unstyled"> 
+                                     <!-- img-circle bootstrap class -->
+                                     <!-- pull left will always position it left -->
+                                    <!-- <li class = "left">
+                                        
+                                        <span class="chat-img1 pull-left">
+                                           
+                                            <img src="http://placehold.it/300x300" class="img-circle" alt = "">
+                                        </span> 
+                                        <div class="chat-body1">
+                                            <span class="chat-name">Username</span>
+                                            <br>
+                                            Message Body
+                                        </div>
+                                    </li> -->
+                                </ul>
+                            <script id = "message-template" type="text/template"> 
+                                <li class = "left">
+                                        
+                                    <span class="chat-img1 pull-left">
+                                       
+                                        <img src="http://placehold.it/300x300" class="img-circle" alt = "">
+                                    </span> 
+                                    <div class="chat-body1">
+                                        <span class="chat-name">{{sender}}</span>
+                                        <br>
+                                        {{text}}
+                                    </div>
+                                </li>
+                            </script>
                             </div>
 
                             <div class="message_write">
                               <form id="message-form" method="post">
                                 <!-- gets the group name from the groupcht controller -->
                                 <input type="hidden" id ="name" value="<%= name %>">
+                                <!-- gets the username or fullname depending on which one is set, from the user -->
+                                <input type="hidden"  id ="sender" name="sender"  value="<%= user.username || user.fullname %>">
                                   <textarea class="form-control" name="message" id="msg" placeholder="Type a message"></textarea>
                                   <div class="clearfix"></div>
                                   <div class="chat_bottom">
@@ -130,7 +161,7 @@
                             <div class="pull-left">
                                 <button class="club_fans">
                                     <i class="fa fa-users" aria-hidden="true" style="padding-right:15px; color:#520e79 !important;"></i>
-                                    Online Club Fans <span id="numValue"></span>
+                                    Online Members <span id="numValue"></span>
                                 </button>
                             </div>
                         </div>
@@ -188,7 +219,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>  
 <!-- client side library -->
 <script src="/socket.io/socket.io.js"></script>
+<!-- server side library -->
 <script src="/js/group/groupchat.js"></script>
+<!-- mustache used to render the chat message and name of the sender on the html page -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
+
 
 
 </body>

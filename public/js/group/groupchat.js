@@ -3,7 +3,7 @@ $(document).ready(function(){
     var socket = io();
     // gets the name of the group from the group.ejs
     var room = $('#name').val();
-
+    var sender = $('#sender').val();
     socket.on('connect',function(){
         //will be displayed on the browser
         console.log('user connected successfully')
@@ -19,8 +19,16 @@ $(document).ready(function(){
     });
 
     socket.on('newData',function(data){
-        console.log(data.text);
-        console.log(data.room);
+        console.log(data);
+        var template = $('#message-template').html();
+        var message = Mustache.render(template,{
+            text:data.text,
+            sender: data.sender
+
+
+        }) ;
+        // the data from message will be added to the unorderd list in the hmtl page
+       $("#messages").append(message);
     });
 
     $('#message-form').on('submit',function(e){
@@ -31,7 +39,8 @@ $(document).ready(function(){
         //adding anew event that will have to be listen on the server side as well
         socket.emit('newMessage', {
             text: msg,
-            room: room
+            room: room,
+            sender: sender
             // acknowledgement functiopn to cleanse input field once message is sent
         },function(){
             $('#msg').val('');

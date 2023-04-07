@@ -8,7 +8,7 @@ const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const passport = require('passport');
-const {Users} = require('./helpers/UsersClass');
+// const {Users} = require('./helpers/UsersClass');
 const compression = require('compression');
 const helmet = require('helmet');
 

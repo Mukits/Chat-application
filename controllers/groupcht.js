@@ -6,7 +6,7 @@ module.exports = function(){
         // function containing the render method which renders the view file groupChats/group
         groupPage: function(req,res){
             const name = req.params.groupName;
-            res.render('groupChats/group',{title: 'Chat-application - Group',name:name});
+            res.render('groupChats/group',{title: 'Chat-application - Group', user:req.user, name:name});
         }
     }
 }

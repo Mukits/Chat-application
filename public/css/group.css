@@ -111,21 +111,27 @@ h3 {
     hyphens: auto;
 }
 
-    .chat_area li {
+.chat_area li {
         padding: 14px 14px 0;
     }
 
-        .chat_area li .chat-img1 img {
+.chat_area li .chat-img1 img {
             height: 40px;
             width: 40px;
         }
 
-    .chat_area .chat-body1 {
+.chat_area .chat-body1 {
         margin-left: 50px;
     }
 
 .chat_area li:last-child {
     padding-bottom: 10px;
+}
+
+.chat-name{
+    font-size: 17px;
+    font-weight: 600;
+    color:#520e79;
 }
 
 .message_write {

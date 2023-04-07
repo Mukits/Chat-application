@@ -15,7 +15,8 @@ module.exports = function(io){
             //io.to().emit send the message to all the connected clients to a specific room including the sender
             io.to(message.room).emit('newData',{
                 text: message.text,
-                room: message.room
+                room: message.room,
+                sender: message.sender
             });
             callback();
         });
