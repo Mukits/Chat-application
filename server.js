@@ -8,7 +8,7 @@ const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const passport = require('passport');
-// const {Users} = require('./helpers/UsersClass');
+const {Users} = require('./helpers/UserHelper');
 const compression = require('compression');
 const helmet = require('helmet');
 
@@ -33,7 +33,7 @@ container.resolve(function(users, _, admin, home, groupcht){
         });
         ConfigureExpress(app);
         
-        require('./socketio/groupchat')(io);
+        require('./socketio/groupchat')(io, Users);
         // require('./socket/friend')(io);
         // require('./socket/globalroom')(io, Global, _);
         // require('./socket/privatemessage')(io);

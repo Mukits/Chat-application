@@ -9,7 +9,8 @@ $(document).ready(function(){
         console.log('user connected successfully')
 
         var params = {
-            room:room
+            room:room,
+            userName: sender
         }
         // new event whenever a new user joins 
         socket.emit('join',params,function(){

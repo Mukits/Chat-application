@@ -1,4 +1,6 @@
-module.exports = function(io){
+module.exports = function(io, Users){
+    const members = new Users();
+    
     //for the connection io.on will listen to the connection
     io.on('connection',(socket)=>{
         //will be displayed on the console
@@ -6,6 +8,9 @@ module.exports = function(io){
         socket.on('join',(params,callback)=>{
             // it allows socket to join a particular channel
             socket.join(params.room)
+            // params are got from the client side version of groupchat.js in public folder
+            members.AddUserData(socket.id,params.userName,params.room);
+            console.log(members);
 
             callback();
         });
