@@ -15,7 +15,7 @@ const {Global} = require('./helpers/Global');
 
 const container = require('./container');
 //parameters are the controllers we are creating
-container.resolve(function (users, _, admin, home, groupcht) {
+container.resolve(function (users, _, admin, home, groupcht, searchResults) {
 
     mongoose.set('useFindAndModify', false);
     mongoose.set('useCreateIndex', true);
@@ -45,6 +45,7 @@ container.resolve(function (users, _, admin, home, groupcht) {
         admin.SetRouting(router);
         home.SetRouting(router);
         groupcht.SetRouting(router);
+        searchResults.SetRouting(router);
         app.use(router);
 
         app.use(function (req, res) {
