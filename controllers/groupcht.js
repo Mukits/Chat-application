@@ -4,6 +4,7 @@ module.exports = function (async, Users) {
         SetRouting: function (router) {
             router.get('/group/:groupName', this.groupPage);
             router.post('/group/:groupName', this.groupPagePost)
+            router.get('/logout', this.logout);
         },
         // function containing the render method which renders the view file groupChats/group
         groupPage: function (req, res) {
@@ -179,6 +180,14 @@ module.exports = function (async, Users) {
 
             ], (err,results) => {
                 res.redirect('/group/'+req.params.name);
+            });
+        },
+        logout: function(req,res){
+            // logout method available through passport
+            req.logout();
+            // destroy the user session
+            req.session.destroy((err)=>{
+                res.redirect('/');
             });
         }
     }

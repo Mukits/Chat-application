@@ -3,6 +3,7 @@ module.exports = function (async, group, _, Users) {
         SetRouting: function (router) {
             router.get('/home', this.homePage);
             router.post('/home',this.homePagePost);
+            router.get('/logout', this.logout);
         },
         homePage: function (req, res) {
             async.parallel([
@@ -80,6 +81,15 @@ module.exports = function (async, group, _, Users) {
                 }
             ],(err,results) => {
                 res.redirect('/home')
+            });
+        },
+        // once the logout is clicked we want to destroy the user session
+        logout: function(req,res){
+            // logout method available through passport
+            req.logout();
+            // destroy the user session
+            req.session.destroy((err)=>{
+                res.redirect('/');
             });
         }
     }
