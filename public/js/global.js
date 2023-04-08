@@ -26,7 +26,12 @@ $(document).ready(function () {
         for(var i = 0; i < users.length; i++){
             if(friend.indexOf(users[i].name) > -1){
                 arr.push(users[i]);
-                ol.append(users[i].name);
+                // some css using bootstrap classes
+                var list = '<img src="https://placehold.it/300x300" class="pull-left img-circle" style="width:50px; margin-right:10px;"/><p>' +
+                '<a href="/chat"><h3 style="padding-top:15px; color:gray; font-size:14px;">'+'@'+users[i].name+'</h3></a></p>'
+                ol.append(list);
+
+                
 
             }
         }
