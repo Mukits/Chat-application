@@ -83,6 +83,12 @@
                                             <!-- uses bootstrap form control class -->
                                             <select class="form-control" name="country" id="country">
                                                 <option value="">Filter By Country</option>
+                                                <!-- uses the country array inside home.js to display filtering options -->
+                                                <% _.forEach(country,function(val) {%>
+                                                    <option value="<%=val._id %>">
+                                                        <%=val._id %>
+                                                    </option>
+                                                    <% })%>
                                             </select>
                                             <div class="clearfix"></div>
                                             <button class="btn add-apply">Apply</button>
@@ -96,8 +102,49 @@
 
                 <div class="col-md-9">
                     <div>
-                        
-                       
+                        <!-- gets the data array from the home.js and uses lodash simplified for each loop -->
+                        <% _.forEach(parts, function(val){%>
+                            <div class="category-list">
+                                <div class="row">
+                                    <% _.forEach(val, function(val2){%>
+                                        <form action="/home" method="post" id="addFav">
+                                            <div class="item col-md-4">
+                                                <a href="/group/<%= val2.name %>">
+                                                    <div class="thumbnail">
+                                                        <img src="https://chatapplicationmukitur.s3.amazonaws.com/<%= val2.image %>"
+                                                            alt="image">
+                                                        <div class="caption">
+                                                            <h4>
+                                                                <%= val2.name %> (<%= val2.members.length%>)
+                                                            </h4>
+
+                                                            <div class="row">
+                                                                <div class="col-xs-12 col-md-6">
+                                                                    <p>
+                                                                        <%= val2.country %>
+                                                                    </p>
+                                                                </div>
+
+                                                                <div class="col-xs-12 col-md-6">
+                                                                    <!-- gets the id of the group -->
+                                                                    <input type="hidden" name="id" id = "id" value="<%= val2._id %>">
+                                                                    <!-- gets the nname of the group of the group -->
+                                                                    <input type="hidden" name="groupName" id="groupName" value="<%= val2.name %>">
+                                                                    <button class="btn add-fav">
+                                                                        Add To Favorite
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </form>
+                                        <% })%>
+                                </div>
+
+                            </div>
+                            <% })%>
                     </div>
                 </div>
             </div>
