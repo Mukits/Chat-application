@@ -1,6 +1,7 @@
 module.exports = function(async, group){
     return {
         SetRouting: function(router){
+            // ROUTES FOR ACTION BUTTONS
             router.get('/searchResults', this.getResults);
             router.post('/searchResults', this.postResults);
             
