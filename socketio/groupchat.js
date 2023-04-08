@@ -27,7 +27,7 @@ module.exports = function (io, Users) {
             });
             callback();
         });
-        // socket.io containts this disconnect event that, when user disconnects the member will be removed and list will be update using io.to (sends message to evryone including sender)
+        // socket.io contains this disconnect event that, when user disconnects the member will be removed and list will be update using io.to (sends message to evryone including sender)
         socket.on('disconnect', () => {
             var member = members.RemoveUser(socket.id);
             if (member) {

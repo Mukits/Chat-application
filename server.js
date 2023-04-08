@@ -11,7 +11,7 @@ const passport = require('passport');
 const { Users } = require('./helpers/UserHelper');
 const compression = require('compression');
 const helmet = require('helmet');
-
+const {Global} = require('./helpers/Global');
 
 const container = require('./container');
 //parameters are the controllers we are creating
@@ -35,6 +35,7 @@ container.resolve(function (users, _, admin, home, groupcht) {
 
         require('./socketio/groupchat')(io, Users);
         require('./socketio/friendRequestSnd')(io);
+        require('./socketio/globalrooms')(io, Global,_);
         // require('./socket/globalroom')(io, Global, _);
         // require('./socket/privatemessage')(io);
 
