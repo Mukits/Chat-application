@@ -1,7 +1,8 @@
 module.exports = function (async, group, _, Users) {
     return {
         SetRouting: function (router) {
-            router.get('/home', this.homePage)
+            router.get('/home', this.homePage);
+            router.post('/home',this.homePagePost);
         },
         homePage: function (req, res) {
             async.parallel([
@@ -55,6 +56,31 @@ module.exports = function (async, group, _, Users) {
                 res.render('home', { title: 'Chat-application - Home', user: req.user, parts: dataBlock, country: sortByCountry, data: res3 });
             })
 
+        },
+
+        homePagePost: function(req,res){
+            async.parallel([
+                function(callback){
+                    // updating the groups model
+                    group.updateOne({
+                        // body iq is from html hidden input
+                        '_id': req.body.id,
+                        // check that username does not already exist
+                        'members.username': {$ne: req.user.username}
+                    },{
+                        // if conditions above are true then push the data into db
+                        $push: {members: {
+                            username: req.user.username,
+                            email: req.user.email
+                        }}
+                    },(err,count) => {
+                        console.log(count);
+                        callback(err,count);
+                    });
+                }
+            ],(err,results) => {
+                res.redirect('/home')
+            });
         }
     }
 }

@@ -70,7 +70,7 @@
                                 <div class="category-list">
                                     <div class="row">
                                         <% _.forEach(val, function(val2){%>
-                                            <form action="#" method="post" id="add-fav">
+                                            <form action="/home" method="post" id="addFav">
                                                 <div class="item col-md-4">
                                                     <a href="/group/<%= val2.name %>">
                                                         <div class="thumbnail">
@@ -78,7 +78,7 @@
                                                                 alt="image">
                                                             <div class="caption">
                                                                 <h4>
-                                                                    <%= val2.name %>
+                                                                    <%= val2.name %> (<%= val2.members.length%>)
                                                                 </h4>
 
                                                                 <div class="row">
@@ -89,6 +89,10 @@
                                                                     </div>
 
                                                                     <div class="col-xs-12 col-md-6">
+                                                                        <!-- gets the id of the group -->
+                                                                        <input type="hidden" name="id" id = "id" value="<%= val2._id %>">
+                                                                        <!-- gets the nname of the group of the group -->
+                                                                        <input type="hidden" name="groupName" id="groupName" value="<%= val2.name %>">
                                                                         <button class="btn add-fav">
                                                                             Add To Favorite
                                                                         </button>
@@ -120,6 +124,7 @@
         <script src="/socket.io/socket.io.js"></script>
         <!-- adds the library for the client side friendrequest -->
         <script src="/js/group/friendRequestSnd.js"></script>
+        <script src="/js/home.js"></script>
     
 </body>
 
