@@ -15,7 +15,7 @@ module.exports = function(async, group){
             async.parallel([
                 function(callback){
                     const regex = new RegExp((req.body.country), 'gi');
-                    
+                    // search either by name or country using or operator, if country is false then name will be true
                     group.find({'$or': [{'country':regex}, {'name': regex}]}, (err, result) => {
                        callback(err, result); 
                     });
