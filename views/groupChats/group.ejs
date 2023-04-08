@@ -45,7 +45,8 @@
                                                 </div>
                                                 <div class="content">
                                                     <div class="main">
-                                                        <h3 class="name">Username || Fullname</h3>
+                                                        <!-- shows the username -->
+                                                        <h3 class="name"><%= user.username %></h3>
                                                         <p class="profession-online">
                                                             <i class="fa fa-circle online" aria-hidden="true"></i>
                                                             Online
@@ -108,7 +109,8 @@
                                 <div class="new_message_head">
                                     <div class="pull-left">
                                         <button class="club_name">
-                                            Group Name
+                                            <!-- display the name of the group taken from the groupcht controller -->
+                                            <%= name %>
                                         </button>
                                     </div>
                                     <div class="pull-right">
