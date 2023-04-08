@@ -7,8 +7,14 @@ $(document).ready(function(){
     var newParam = paramOne.split('.');
     // whatever at index 0 will be replaced with index 1
     console.log('1',newParam);
+    // setting up the username to show on the pm chat
+    var username  = newParam[0];
+    // showing attaching the username to the html tag before swapping
+    $('#recipient').text('PM to: '+username);
     swap(newParam,0,1);
     console.log('2', newParam)
+
+   
     var paramTwo = newParam[0]+'.'+newParam[1];
     // passing the two paths on connection
     socket.on('connect',function(){
