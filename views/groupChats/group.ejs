@@ -24,7 +24,8 @@
     <%- include ../fragments/navigationbar.ejs %>
 
         <div class="col-md-12">
-
+            <input type="hidden" id="name-user" value="<%= user.username %>">
+            <input type="hidden" id="name-image" value="<%= user.userImage %>">
 
             <div class="col-md-12">
                 <div class="chat_container">
@@ -79,6 +80,13 @@
                                                             Online Friends <span id="numOfFriends"></span>
                                                         </p>
                                                         <hr style="margin-top:10px" />
+                                                        <!-- loops through the friendList if the value is greater then 0 -->
+                                                        <% if(data.friendsList.length > 0) { %>
+                                                            <% _.forEach(data.friendsList, function(value) { %>
+                                                                <!-- its set to hidden so its not visible  -->
+                                                            <div class="friend" hidden>@<%= value.friendName %></div>
+                                                            <% }) %>
+                                                        <% } %>
 
                                                         <div class="onlineFriends"></div>
 
