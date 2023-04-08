@@ -129,9 +129,57 @@ module.exports = function (async, Users) {
                                 }},
                         }, (err, count) => {
                             callback(err, count);
-                        })
+                        });
                     }
-                }
+                },
+
+                // cancel request for the receivar
+                function (callback) {
+                    // all this will happen only if user clicks on cancel
+                    if (req.body.user_Id) {
+                        // updating receiver friendlist
+                        Users.updateOne({
+                            '_id': req.user._id,
+                            // checks that userId  exists using equal operator '$eq' in mongodb
+                            'requestReceived.userId': {$eq: req.user._Id }
+                        }, {
+                            
+                           //it will pull out the userId
+                            $pull: {requestReceived: {
+                                    userId: req.body.user_Id
+                                }},
+                            // decrement the amount of total friendrequest since a data was cancelled above
+                            $inc:{totalFriendRequest: -1}
+                        }, (err, count) => {
+                            callback(err, count);
+                        });
+                    }
+                },
+
+
+                    // cancel request for the sender
+                    function (callback) {
+                        // all this will happen only if user clicks on cancel
+                        if (req.body.user_Id) {
+                            // updating receiver friendlist
+                            Users.updateOne({
+                                '_id': req.body.user_Id,
+                                // checks that username  exists using equal operator '$eq' in mongodb
+                                'sentFriendRequest.username': {$eq: req.user.username }
+                            }, {
+                                
+                               //it will pull out the userId
+                                $pull: {sentFriendRequest: {
+                                        username: req.user.username
+                                    }}
+                                // decrement the amount of total friendrequest since a data was cancelled above
+                                
+                            }, (err, count) => {
+                                callback(err, count);
+                            })
+                        }
+                    }
+
             ], (err,results) => {
                 res.redirect('/group/'+req.params.name);
             });

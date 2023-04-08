@@ -35,6 +35,22 @@ $(document).ready(function () {
             });
             $('#refresh').load(location.href + ' #refresh');
         });
+        // without refreshing the page the user can cancel a friend request
+        $(document).on('click', '#cancel_friend', function(){
+            var user_Id = $('#user_Id').val();
+
+            $.ajax({
+                url: '/group/'+room,
+                type: 'POST',
+                data: {
+                    user_Id: user_Id
+                },
+                success: function(){
+                    $(this).parent().eq(1).remove();
+                }
+            });
+            $('#refresh').load(location.href + ' #refresh');
+        });
         
     });
     // added a submit event on the form
@@ -74,6 +90,23 @@ $(document).ready(function () {
             data: {
                 senderId: senderId,
                 senderName: senderName
+            },
+            success: function () {
+                // once button is clicked, after the data is sent to the server, the main element will be removed 
+                $(this).parent().eq(1).remove();
+            }
+        });
+        $('#refresh').load(location.href + ' #refresh');
+    });
+
+    $('#cancel_friend').on('click', function () {
+        var user_Id = $('#user_Id').val();
+
+        $.ajax({
+            url: '/group/' + room,
+            type: 'POST',
+            data: {
+                user_Id: user_Id
             },
             success: function () {
                 // once button is clicked, after the data is sent to the server, the main element will be removed 
