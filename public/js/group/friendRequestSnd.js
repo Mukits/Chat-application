@@ -13,7 +13,7 @@ $(document).ready(function () {
         });
     });
     socket.on('newFriendReq', function (friend) {
-        //console.log(friend);
+       // console.log(friend);
         // using the jquery load which loads the data from the server and puts the returned data into the element where we specify the id
         //  the space before #refresh is needed for it to work otherwise it will not load
         $('#refresh').load(location.href + ' #refresh');
@@ -35,22 +35,22 @@ $(document).ready(function () {
             });
             $('#refresh').load(location.href + ' #refresh');
         });
-        // without refreshing the page the user can cancel a friend request
-        $(document).on('click', '#cancel_friend', function(){
-            var user_Id = $('#user_Id').val();
+        // // without refreshing the page the user can cancel a friend request
+        // $(document).on('click', '#cancel_friend', function(){
+        //     var userId = $('#user_Id').val();
 
-            $.ajax({
-                url: '/group/'+room,
-                type: 'POST',
-                data: {
-                    user_Id: user_Id
-                },
-                success: function(){
-                    $(this).parent().eq(1).remove();
-                }
-            });
-            $('#refresh').load(location.href + ' #refresh');
-        });
+        //     $.ajax({
+        //         url: '/group/'+room,
+        //         type: 'POST',
+        //         data: {
+        //             userId: userId
+        //         },
+        //         success: function(){
+        //             $(this).parent().eq(1).remove();
+        //         }
+        //     });
+        //     $('#refresh').load(location.href + ' #refresh');
+        // });
         
     });
     // added a submit event on the form
@@ -99,20 +99,21 @@ $(document).ready(function () {
         $('#refresh').load(location.href + ' #refresh');
     });
 
-    $('#cancel_friend').on('click', function () {
-        var user_Id = $('#user_Id').val();
+    // $('#cancel_friends').on('click', function () {
+    //     // gets the method from an input field
+    //     var userId = $('#userIds').val();
 
-        $.ajax({
-            url: '/group/' + room,
-            type: 'POST',
-            data: {
-                user_Id: user_Id
-            },
-            success: function () {
-                // once button is clicked, after the data is sent to the server, the main element will be removed 
-                $(this).parent().eq(1).remove();
-            }
-        });
-        $('#refresh').load(location.href + ' #refresh');
-    });
+    //     $.ajax({
+    //         url: '/group/' + room,
+    //         type: 'POST',
+    //         data: {
+    //             userId: userId
+    //         },
+    //         success: function () {
+    //             // once button is clicked, after the data is sent to the server, the main element will be removed 
+    //             $(this).parent().eq(1).remove();
+    //         }
+    //     });
+    //     $('#refresh').load(location.href + ' #refresh');
+    // });
 });

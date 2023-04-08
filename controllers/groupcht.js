@@ -104,6 +104,7 @@ module.exports = function (async, Users) {
                             // decrement the total friend request data
                             $inc: { totalFriendRequest: -1 }
                         }, (err, count) => {
+                            console.log(count)
                             callback(err, count);
                         });
                     }
@@ -126,59 +127,55 @@ module.exports = function (async, Users) {
                             // its goin to go into the requestReceived array look for the userId and username and pull them out
                             $pull: {sentFriendRequest: {
                                     username: req.user.username
-                                }},
+                                }}
                         }, (err, count) => {
+                            console.log(count)
                             callback(err, count);
                         });
                     }
-                },
+                }
 
-                // cancel request for the receivar
-                function (callback) {
-                    // all this will happen only if user clicks on cancel
-                    if (req.body.user_Id) {
-                        // updating receiver friendlist
-                        Users.updateOne({
-                            '_id': req.user._id,
-                            // checks that userId  exists using equal operator '$eq' in mongodb
-                            'requestReceived.userId': {$eq: req.user._Id }
-                        }, {
+                // //updates cance request fro receivar
+                // function(callback){
+                //     if(req.body.userIds){
+                //         Users.updateOne({
+                //             '_id': req.user._id,
+                //             'requestReceived.userId': {$eq: req.body.userIds}
+                //         }, {
+                //             $pull: {requestReceived: {
+                //                 userId: req.body.userIds
+                //             }},
+                //             $inc: {totalFriendRequest: -1}
+                //         }, (err, count) => {
+                //             console.log(count)
+                //             callback(err, count);
+                //         });
+                //     }
+                // }
+
+
+                    // // cancel request for the sender
+                    // function (callback) {
+                    //     // all this will happen only if user clicks on cancel
+                    //     if (req.body.user_Id) {
+                    //         // updating receiver friendlist
+                    //         Users.updateOne({
+                    //             '_id': req.body.user_Id,
+                    //             // checks that username  exists using equal operator '$eq' in mongodb
+                    //             'sentFriendRequest.username': {$eq: req.user.username }
+                    //         }, {
+                                
+                    //            //it will pull out the userId
+                    //             $pull: {sentFriendRequest: {
+                    //                     username: req.user.username
+                    //                 }}
                             
-                           //it will pull out the userId
-                            $pull: {requestReceived: {
-                                    userId: req.body.user_Id
-                                }},
-                            // decrement the amount of total friendrequest since a data was cancelled above
-                            $inc:{totalFriendRequest: -1}
-                        }, (err, count) => {
-                            callback(err, count);
-                        });
-                    }
-                },
-
-
-                    // cancel request for the sender
-                    function (callback) {
-                        // all this will happen only if user clicks on cancel
-                        if (req.body.user_Id) {
-                            // updating receiver friendlist
-                            Users.updateOne({
-                                '_id': req.body.user_Id,
-                                // checks that username  exists using equal operator '$eq' in mongodb
-                                'sentFriendRequest.username': {$eq: req.user.username }
-                            }, {
                                 
-                               //it will pull out the userId
-                                $pull: {sentFriendRequest: {
-                                        username: req.user.username
-                                    }}
-                                // decrement the amount of total friendrequest since a data was cancelled above
-                                
-                            }, (err, count) => {
-                                callback(err, count);
-                            })
-                        }
-                    }
+                    //         }, (err, count) => {
+                    //             callback(err, count);
+                    //         })
+                    //     }
+                    // }
 
             ], (err,results) => {
                 res.redirect('/group/'+req.params.name);

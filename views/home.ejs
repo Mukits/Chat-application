@@ -14,7 +14,7 @@
 
 <body>
     <!-- nav bar was separated from this file since it is used in multiple files -->
-    <%- //include fragments/navigationbar.ejs %>
+    <%- include fragments/navigationbar.ejs %>
         <div class="col-md-12">
             <form action="#" method="post">
                 <div class="form-group ad-30" style="margin-top:8px;">
@@ -66,7 +66,7 @@
                     <div class="col-md-9">
                         <div>
                             <!-- gets the data array from the home.js and uses lodash simplified for each loop -->
-                            <% _.forEach(data, function(val){%>
+                            <% _.forEach(parts, function(val){%>
                                 <div class="category-list">
                                     <div class="row">
                                         <% _.forEach(val, function(val2){%>
@@ -116,6 +116,11 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
+        <!-- server side library -->
+        <script src="/socket.io/socket.io.js"></script>
+        <!-- adds the library for the client side friendrequest -->
+        <script src="/js/group/friendRequestSnd.js"></script>
+    
 </body>
 
 </html>

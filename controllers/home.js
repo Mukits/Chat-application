@@ -1,4 +1,4 @@
-module.exports = function (async, group, _) {
+module.exports = function (async, group, _, Users) {
     return {
         SetRouting: function (router) {
             router.get('/home', this.homePage)
@@ -23,11 +23,22 @@ module.exports = function (async, group, _) {
                     }], (err, newResult) => {
                         callback(err, newResult);
                     });
+                },
+
+                function (callback) {
+                    //it will search for user with username req.user.username
+                    Users.findOne({ 'username': req.user.username })
+                        // its going to then populate that user his data in object requestReceived.userId
+                        .populate('requestReceived.userId')
+                        .exec((err, result) => {
+                            callback(err, result);
+                        })
                 }
 
             ], (err, results) => {
                 const res1 = results[0];
                 const res2 = results[1];
+                const res3 = results[2];
                 console.log(res2);
                 // every three results they will be put in the arrays
                 const dataBlock = [];
@@ -41,7 +52,7 @@ module.exports = function (async, group, _) {
                 const sortByCountry = _.sortBy(res2, "_id");
                 //console.log(dataBlock);
                 // console.log(res1);
-                res.render('home', { title: 'Chat-application - Home', user: req.user, data: dataBlock, country: sortByCountry });
+                res.render('home', { title: 'Chat-application - Home', user: req.user, parts: dataBlock, country: sortByCountry, data: res3 });
             })
 
         }
