@@ -11,9 +11,15 @@ module.exports = function(io)
 
         });
 
-        socket.on('private message', (message)=>{
+        socket.on('private message', (message, callback)=>{
             // if this is successfull we will see the name and text of the sender
             console.log(message);
-        })
+            // emits to everyone including sender
+            io.to(message.room).emit('new message',{
+                text: message.text,
+                sender: message.sender
+            });
+            callback();
+        });
     });
 }

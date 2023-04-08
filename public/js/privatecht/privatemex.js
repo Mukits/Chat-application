@@ -10,7 +10,7 @@ $(document).ready(function(){
     swap(newParam,0,1);
     console.log('2', newParam)
     var paramTwo = newParam[0]+'.'+newParam[1];
-
+    // passing the two paths on connection
     socket.on('connect',function(){
         var params = {
             room1: paramOne,
@@ -20,6 +20,18 @@ $(document).ready(function(){
         console.log('user joined pm');
         });
 
+        // render the message using mustache template
+        socket.on('new message',function(data){
+            var template = $('#message-template').html();
+            var message = Mustache.render(template, {
+                text: data.text,
+                sender: data.sender
+    
+    
+            });
+            // the data from message will be added to the unorderd list in the hmtl page
+            $("#messages").append(message);
+        });
         $('#message_form').on('submit', function (e) {
             // to prevent the form to reload after its submitted
             e.preventDefault();
@@ -30,8 +42,12 @@ $(document).ready(function(){
             if(msg.trim().length > 0){
                 socket.emit('private message',{
                     text: msg,
-                    sender:sender
-                })
+                    sender:sender,
+                    room: paramOne
+                }, function(){
+                    // to clear the input field when message is sent
+                    $('#msg').val('');
+                });
             }
         });
     });
