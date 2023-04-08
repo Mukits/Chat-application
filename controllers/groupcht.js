@@ -1,5 +1,5 @@
 // Users is registered as a dependency in the container file
-module.exports = function (Users, async) {
+module.exports = function (async, Users) {
     return {
         SetRouting: function (router) {
             router.get('/group/:groupName', this.groupPage);
@@ -13,7 +13,7 @@ module.exports = function (Users, async) {
                 function (callback) {
                     //it will search for user with username req.user.username
                     Users.findOne({ 'username': req.user.username })
-                        // its going to then populate that user his data including requestReceived.userId
+                        // its going to then populate that user his data in object requestReceived.userId
                         .populate('requestReceived.userId')
                         .exec((err, result) => {
                             callback(err, result);
@@ -21,8 +21,8 @@ module.exports = function (Users, async) {
                 }
             ], (err, results) => {
                 const firstResult = results[0];
-                console.log(firstResult);
-                res.render('groupChats/group', { title: 'Chat-application - Group', user: req.user, name: name , data:firstResult});
+                //console.log(firstResult);
+                res.render('groupChats/group', { title: 'Chat-application - Group', user: req.user, name: name, data: firstResult });
             });
 
         },
@@ -78,6 +78,62 @@ module.exports = function (Users, async) {
                 }
             ], (err, results) => {
                 res.redirect('/group/' + req.params.name);
+            });
+
+            async.parallel([
+                // this function is updates the document for the receiver when the friend request is accepted
+                function (callback) {
+                    // all this will happen only if user clicks on accept
+                    if (req.body.senderId) {
+                        // updating receiver friendlist
+                        Users.updateOne({
+                            '_id': req.user._id,
+                            // checks that friend is does not already exists
+                            'friendsList.friendId': { $ne: req.body.senderId }
+                        }, {
+                            $push: {friendsList: {
+                                    friendId: req.body.senderId,
+                                    friendName: req.body.senderName
+                                }},
+                            // after pushing the data into the friendlist
+                            // its goin to go into the requestReceived array look for the userId and username and pull them out
+                            $pull: {requestReceived: {
+                                    userId: req.body.senderId,
+                                    username: req.body.senderName
+                                }},
+                            // decrement the total friend request data
+                            $inc: { totalFriendRequest: -1 }
+                        }, (err, count) => {
+                            callback(err, count);
+                        });
+                    }
+                },
+                // this function is updates the document for the sender when the friend request is accepted by the receiver
+                function (callback) {
+                    // all this will happen only if user clicks on accept
+                    if (req.body.senderId) {
+                        // updating receiver friendlist
+                        Users.updateOne({
+                            '_id': req.body.senderId,
+                            // checks that friend is does not already exists
+                            'friendsList.friendId': {$ne: req.user._Id }
+                        }, {
+                            $push: {friendsList: {
+                                    friendId: req.user._Id,
+                                    friendName: req.user.username
+                                }},
+                            // after pushing the data into the friendlist
+                            // its goin to go into the requestReceived array look for the userId and username and pull them out
+                            $pull: {sentFriendRequest: {
+                                    username: req.user.username
+                                }},
+                        }, (err, count) => {
+                            callback(err, count);
+                        })
+                    }
+                }
+            ], (err,results) => {
+                res.redirect('/group/'+req.params.name);
             });
         }
     }
