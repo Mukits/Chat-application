@@ -3,6 +3,7 @@ module.exports = function(async, Users){
         SetRouting: function(router){
             // param name added 
             router.get('/privateChat/:name',this.getChatPage);
+            router.post('/privateChat/:name', this.privateChatPostPage)
         },
         getChatPage: function(req,res){
             async.parallel([
@@ -20,6 +21,29 @@ module.exports = function(async, Users){
                 //console.log(firstResult);
                 res.render('privateChat/privateChat', { title: 'Chat-application - Private chat', user: req.user,  data: firstResult });
             });
+        },
+        privateChatPostPage: function(req,res,next){
+            const params = req.params.name.split('.');
+            const nameParams = params[0];
+            const nameRegex = new RedExp("^"+nameParams.toLowerCase(), "i");
+            async.waterfall([
+                function(callback){
+                    // if the bessage body is set on the privatemessage html then
+                    if(req.body.message){
+                        Users.FindOne({'username':{$regex: nameRegex}}, (err,data)=>{
+                            callback(err,data);
+                        });
+                    }
+                },
+
+                function(data, callback){
+                    if(req.body.message){
+                        
+                    }
+                }
+            ], (err,results)=>{
+                res.redirect('/privateChat/'+req.params.name);
+            })
         }
     }
 }
