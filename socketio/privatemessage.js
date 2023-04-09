@@ -19,6 +19,8 @@ module.exports = function(io)
                 text: message.text,
                 sender: message.sender
             });
+// emits event to all users connected to that private room
+            io.emit('message display',{});
             callback();
         });
     });

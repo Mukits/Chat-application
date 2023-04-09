@@ -25,7 +25,10 @@ $(document).ready(function(){
         socket.emit('join private',params, function(){
         console.log('user joined pm');
         });
-
+// once the event comes in the div with that id will be reloaded
+        socket.on('message display',function(){
+            $('#refresh').load(location.href + ' #refresh');
+        });
         // render the message using mustache template
         socket.on('new message',function(data){
             var template = $('#message-template').html();
