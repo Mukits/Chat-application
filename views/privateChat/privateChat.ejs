@@ -118,20 +118,44 @@
 
                                 <div class="chat_area">
                                     <ul id="messages" class="list-unstyled">
+                                        <!-- happens only if the array lenght is greater than 0 -->
+
+                                        <% if(pms.length >0){%>
+                                        <% _.forEach(pms,function(val){%>
+                                        <!-- if the name is equal to receiver username the get that user messages and displa them-->
+                                        <% if(keyname===val.receiver.username.toLowerCase()) {%>
                                         <!-- img-circle bootstrap class -->
                                         <!-- pull left will always position it left -->
-                                        <!-- <li class = "left">
+                                         <li class = "left">
                                         
                                         <span class="chat-img1 pull-left">
                                            
                                             <img src="http://placehold.it/300x300" class="img-circle" alt = "">
                                         </span> 
                                         <div class="chat-body1">
-                                            <span class="chat-name">Username</span>
+                                            <span class="chat-name"><%= val.senderName %></span>
                                             <br>
-                                            Message Body
+                                            <%= val.message %>
                                         </div>
-                                    </li> -->
+                                    </li>
+                                    <%} else if (keyname===val.sender.username.toLowerCase()) {%>
+                                        <!-- img-circle bootstrap class -->
+                                        <!-- pull left will always position it left -->
+                                         <li class = "left">
+                                        
+                                        <span class="chat-img1 pull-left">
+                                           
+                                            <img src="http://placehold.it/300x300" class="img-circle" alt = "">
+                                        </span> 
+                                        <div class="chat-body1">
+                                            <span class="chat-name"><%= val.senderName %></span>
+                                            <br>
+                                            <%= val.message %>
+                                        </div>
+                                    </li>
+                                    <% } %>
+                                    <%})%> 
+                                    <% } %>
                                     </ul>
                                     <script id="message-template" type="text/template">
                                 <li class = "left">

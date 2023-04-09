@@ -72,8 +72,14 @@ module.exports = function(async, Users,Message){
             ], (err, results) => {
                 const firstResult = results[0];
                 const secondResult = results[1];
+                const thirdResult = results[2];
+
+                console.log(thirdResult);
+
+                const params = req.params.name.split('.');
+                const nameParams = params[0];
                 //console.log(firstResult);
-                res.render('privateChat/privateChat', { title: 'Chat-application - Private chat', user: req.user,  data: firstResult, pm: secondResult });
+                res.render('privateChat/privateChat', { title: 'Chat-application - Private chat', user: req.user,  data: firstResult, pm: secondResult, pms: thirdResult, keyname: nameParams});
             });
         },
 
