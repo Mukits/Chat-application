@@ -28,7 +28,8 @@
                 </div>
             </div>
             <div class="col-md-12">
-
+                <% if(pm.length >0) {%>
+                <% _.forEach(pm,function(val) {%>
                 <a href="">
                 <div class="row">
                     <div class="col-md-3">
@@ -41,9 +42,14 @@
                             <div class="col-md-12 textRow">
                                 <div class="col-md-12" id="textRow">
                                     <p class="text-left drop-name">
-                                        <strong>Sender Name</strong>
+                                        <!-- if the logged in username is user.username is not the receiverName then show receiverName otherwise show senderName -->
+                                       <% if(user.username !== val.body.receiverName){%>
+                                       <strong><%= val.body.receiverName%></strong>
+                                       <% }else{%>
+                                        <strong><%= val.body.senderName%></strong>
+                                       <% }%>
                                     </p>
-                                    Body
+                                    <%= val.body.message%>
                                 </div>
                             </div>
                         </div>
@@ -51,7 +57,8 @@
                 </div>
                 </a>
                 <hr class="dropdown-divider" />
-
+                <% }) %>
+                <% }%>
             </div>
         </div>
     </li>
