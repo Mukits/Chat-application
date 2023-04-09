@@ -24,10 +24,10 @@ module.exports = function(async, Users,Message){
                     Message.aggregate([
                         // it will match and search for every document inside the message collection where senderName 
                         // and receiverName is equal to user.username
-                        {$match: {$or: [{'senderName': nameRegex},
-                        {'receiverName': nameRegex}]}},
+                        {$match: {$or: [{"senderName": nameRegex},
+                        {"receiverName": nameRegex}]}},
                         // sort the data
-                        {$sort:{'createdAt':-1}},
+                        {$sort:{"createdAt":-1}},
                         {
                             $group: { "_id":{
                                 "last_message_between": { 
@@ -93,7 +93,7 @@ module.exports = function(async, Users,Message){
                 function(callback){
                     if(req.body.message){
                         Users.findOne({'username':{$regex: nameRegex}}, (err, data) => {
-                           callback(err, data);
+                        callback(err, data);
                         });
                     }
                 },
@@ -120,7 +120,28 @@ module.exports = function(async, Users,Message){
                 }
             ], (err, results) => {
                 res.redirect('/privateChat/'+req.params.name);
-            })
+            });
+            // check if the id in the body is available on the database
+            //then it will look fot he document whose document is equal to req.body.pmId
+            // it will then update isRead to true and redirect the user
+            async.parallel([
+                function(callback){
+                    if(req.body.pmId){
+                        Message.updateOne({
+                            '_id': req.body.pmId
+                        },
+                        {
+                            "isRead": true
+                        },(err,done)=>{
+                            console.log("this is the notification value been set to read ");
+                            console.log(done);
+                            callback(err,done);
+                        })
+                    }
+                }
+            ], (err, results) => {
+                res.redirect('/privateChat/'+req.params.name);
+            });
         }
     }
 }

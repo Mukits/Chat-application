@@ -13,6 +13,9 @@ $(document).ready(function () {
             img: img
         });
 
+        socket.on('message display',function(){
+            $('#refresh').load(location.href + ' #refresh');
+        });
 
     });
     socket.on('loggedInUser',function(users){

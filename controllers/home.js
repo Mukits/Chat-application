@@ -1,4 +1,4 @@
-module.exports = function (async, group, _, Users) {
+module.exports = function (async, group, _, Users,Message) {
     return {
         SetRouting: function (router) {
             router.get('/home', this.homePage);
@@ -35,12 +35,52 @@ module.exports = function (async, group, _, Users) {
                         .exec((err, result) => {
                             callback(err, result);
                         })
-                }
+                },
+                function(callback){
+                    // to avoid complexity for uppercase and lowercase usernames
+                    const nameRegex = new RegExp("^"+req.user.username.toLowerCase(), "i");
+                    Message.aggregate([
+                        // it will match and search for every document inside the message collection where senderName 
+                        // and receiverName is equal to user.username
+                        {$match: {$or: [{"senderName": nameRegex},
+                        {"receiverName": nameRegex}]}},
+                        // sort the data
+                        {$sort:{"createdAt":-1}},
+                        {
+                            $group: { "_id":{
+                                "last_message_between": { 
+                                    // mongodb condition operator to return onl;y data we need
+                                    $cond : [
+                                        {
+                                            // greater than operator mongodb
+                                            $gt: [
+                                                // substr to get data from index 0 to 1 so get the senderName and receiverName
+                                                {$substr:["$senderName",0,1]},
+                                                {$substr:["$receiverName",0,1]}]
+                                        },
+                                        // contatenating the senderName and receiverName
+                                        {$concat:["$senderName"," and ","$receiverName"]},
+                                        {$concat:["$receiverName"," and ","$senderName"]}
+                                        
+                                    ]
+                                }
+                                // the body will hold all the data processed above, root means the currently processed document
+                            }, "body": {$first: "$$ROOT"}
+                            }
+
+                        }], function(err,newResult){
+                            // it should be returning the newest message between user1 and user2
+                            console.log(newResult);
+                            callback(err,newResult);
+                        }
+                    )
+                },
 
             ], (err, results) => {
                 const res1 = results[0];
                 const res2 = results[1];
                 const res3 = results[2];
+                const res4 = results[3];
                 console.log(res2);
                 // every three results they will be put in the arrays
                 const dataBlock = [];
@@ -54,7 +94,7 @@ module.exports = function (async, group, _, Users) {
                 const sortByCountry = _.sortBy(res2, "_id");
                 //console.log(dataBlock);
                 // console.log(res1);
-                res.render('home', { title: 'Chat-application - Home', user: req.user, parts: dataBlock, country: sortByCountry, data: res3 });
+                res.render('home', { title: 'Chat-application - Home', user: req.user, parts: dataBlock, country: sortByCountry, data: res3, pm:res4 });
             })
 
         },
