@@ -56,6 +56,18 @@ module.exports = function(async, Users,Message){
                             callback(err,newResult);
                         }
                     )
+                },
+                // return an array of all of the messages for both users
+                function(callback){
+                    Message.find({'$or':[{'senderName': req.body.username},
+                    {'receiverName':req.user.username}]})
+                    .populate('sender')
+                    .populate('receiver')
+                    .exec((err,res)=>{
+                        // will show all the messages belonging to both users
+                        console.log(res);
+                        callback(err,res)
+                    })
                 }
             ], (err, results) => {
                 const firstResult = results[0];
