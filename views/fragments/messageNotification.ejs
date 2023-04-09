@@ -1,6 +1,19 @@
+<!-- loop through the pm value that is being returned from the privateChat controller -->
+<!-- and check for every data that is not read with isRead value === false and if it still false increment the variable by 1 -->
+<% var numOfReadMsg = 0 %>
+<% for(var count = 0; count < pm.length; count++) {
+    <!-- after this loop  numOfReadMsg will hold the number of messages that are unread -->
+    if(pm[count].body.isRead === false){
+        numOfReadMsg = numOfReadMsg + 1
+    }
+} %>
 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
     <span class="fa fa-globe "></span> <b class="caret"></b> 
+    <% if( numOfReadMsg !== 0 ){ %>
+    <span class="label label-primary nav-label-icon" id=""><%= numOfReadMsg %></span>
+    <% } else { %>
     <span class="label label-primary nav-label-icon" id=""></span>
+    <% }%>
 </a>
 <ul class="dropdown-menu dmenu">
     <li>
