@@ -30,7 +30,8 @@
             <div class="col-md-12">
                 <% if(pm.length >0) {%>
                 <% _.forEach(pm,function(val) {%>
-                <a href="">
+                <% if(user.username !== val.body.senderName) { %>
+                <a href="/privatechat/<%= _.lowerCase(val.body.senderName) %>.<%= _.lowerCase(user.username) %>">
                 <div class="row">
                     <div class="col-md-3">
                         <p class="text-center">
@@ -56,7 +57,35 @@
                     </div>
                 </div>
                 </a>
+                <%} else if(user.username === val.body.senderName){ %>
+                    <a href="/privateChat/<%= _.lowerCase(val.body.receiverName) %>.<%= _.lowerCase(user.username) %>">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p class="text-center">
+                                   <img src="https://placehold.it/300x300" class="img-circle img-responsive dropdown-img" />
+                                </p>
+                            </div>
+                            <div class="col-md-9 pleft-0">
+                                <div class="row">
+                                    <div class="col-md-12 textRow">
+                                        <div class="col-md-12" id="textRow">
+                                            <p class="text-left drop-name">
+                                                <!-- if the logged in username is user.username is not the receiverName then show receiverName otherwise show senderName -->
+                                               <% if(user.username !== val.body.receiverName){%>
+                                               <strong><%= val.body.receiverName%></strong>
+                                               <% }else{%>
+                                                <strong><%= val.body.senderName%></strong>
+                                               <% }%>
+                                            </p>
+                                            <%= val.body.message%>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </a>
                 <hr class="dropdown-divider" />
+                <%}%>
                 <% }) %>
                 <% }%>
             </div>

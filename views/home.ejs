@@ -75,7 +75,7 @@
                                             <form action="/home" method="post" id="addFav">
                                                 
                                                 <div class="item col-md-4">
-                                                    <a href="/group/<%= val2.name %>">
+                                                    <a href="/group/<%= val2.name.replace(/ /g, "-") %>">
                                                         <div class="thumbnail">
                                                             <img src="https://chatapplicationmukitur.s3.amazonaws.com/<%= val2.image %>"
                                                                 alt="image">
