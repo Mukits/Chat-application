@@ -58,7 +58,7 @@ $(document).ready(function(){
         });
         // once the button is clicked the data will be sent to the db and msg value will be emptied
         $('#send-message').on('click',function(){
-            var message = $('msg').val();
+            var message = $('#msg').val();
 
             $.ajax({
                 url:'/privateChat/'+paramOne,

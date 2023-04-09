@@ -1,4 +1,4 @@
-module.exports = function(async, Users){
+module.exports = function(async, Users,Message){
     return {
         SetRouting: function(router){
             // param name added 
@@ -22,26 +22,41 @@ module.exports = function(async, Users){
                 res.render('privateChat/privateChat', { title: 'Chat-application - Private chat', user: req.user,  data: firstResult });
             });
         },
-        privateChatPostPage: function(req,res,next){
+        privateChatPostPage: function(req, res, next){
             const params = req.params.name.split('.');
             const nameParams = params[0];
-            const nameRegex = new RedExp("^"+nameParams.toLowerCase(), "i");
+            const nameRegex = new RegExp("^"+nameParams.toLowerCase(), "i");
+            
             async.waterfall([
                 function(callback){
-                    // if the bessage body is set on the privatemessage html then
                     if(req.body.message){
-                        Users.FindOne({'username':{$regex: nameRegex}}, (err,data)=>{
-                            callback(err,data);
+                        Users.findOne({'username':{$regex: nameRegex}}, (err, data) => {
+                           callback(err, data);
                         });
                     }
                 },
-
+                
                 function(data, callback){
                     if(req.body.message){
+                        const newMessage = new Message();
+                        newMessage.sender = req.user._id;
+                        newMessage.receiver = data._id;
+                        newMessage.senderName = req.user.username;
+                        newMessage.receiverName = data.username;
+                        newMessage.message = req.body.message;
+                        newMessage.userImage = req.user.userImage;
+                        newMessage.createdAt = new Date();
                         
+                        newMessage.save((err, result) => {
+                            if(err){
+                                return next(err);
+                            }
+                            console.log(result);
+                            callback(err, result);
+                        })
                     }
                 }
-            ], (err,results)=>{
+            ], (err, results) => {
                 res.redirect('/privateChat/'+req.params.name);
             })
         }
