@@ -1,4 +1,4 @@
-module.exports = function (async, group, _, Users,Message) {
+module.exports = function (async, group, _, Users,Message, friendRequest) {
     return {
         SetRouting: function (router) {
             router.get('/home', this.homePage);
@@ -119,23 +119,11 @@ module.exports = function (async, group, _, Users,Message) {
                         callback(err,count);
                     });
                 },
-                function(callback){
-                    if(req.body.pmId){
-                        Message.updateOne({
-                            '_id': req.body.pmId
-                        },
-                        {
-                            "isRead": true
-                        },(err,done)=>{
-                            console.log("this is the notification value been set to read ");
-                            console.log(done);
-                            callback(err,done);
-                        })
-                    }
-                }
+                
             ],(err,results) => {
                 res.redirect('/home')
             });
+            friendRequest.PostReq(req,res,'/home');
         },
         // once the logout is clicked we want to destroy the user session
         logout: function(req,res){

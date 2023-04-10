@@ -1,4 +1,4 @@
-module.exports = function(async, Users,Message){
+module.exports = function(async, Users,Message, friendRequest){
     return {
         SetRouting: function(router){
             // param name added 
@@ -121,27 +121,7 @@ module.exports = function(async, Users,Message){
             ], (err, results) => {
                 res.redirect('/privateChat/'+req.params.name);
             });
-            // check if the id in the body is available on the database
-            //then it will look fot he document whose document is equal to req.body.pmId
-            // it will then update isRead to true and redirect the user
-            async.parallel([
-                function(callback){
-                    if(req.body.pmId){
-                        Message.updateOne({
-                            '_id': req.body.pmId
-                        },
-                        {
-                            "isRead": true
-                        },(err,done)=>{
-                            console.log("this is the notification value been set to read ");
-                            console.log(done);
-                            callback(err,done);
-                        })
-                    }
-                }
-            ], (err, results) => {
-                res.redirect('/privateChat/'+req.params.name);
-            });
+            friendRequest.PostReq(req,res,'/privateChat/'+req.params.name)
         }
     }
 }
