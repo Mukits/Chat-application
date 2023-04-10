@@ -107,47 +107,47 @@ return {
                 }
             },
             
-            // //updates cance request fro receivar
-            // function(callback){
-            //     if(req.body.userIds){
-            //         Users.updateOne({
-            //             '_id': req.user._id,
-            //             'requestReceived.userId': {$eq: req.body.userIds}
-            //         }, {
-            //             $pull: {requestReceived: {
-            //                 userId: req.body.userIds
-            //             }},
-            //             $inc: {totalFriendRequest: -1}
-            //         }, (err, count) => {
-            //             console.log(count)
-            //             callback(err, count);
-            //         });
-            //     }
-            // }
+            //updates cance request fro receivar
+            function(callback){
+                if(req.body.user_Id){
+                    Users.updateOne({
+                        '_id': req.user._id,
+                        'requestReceived.userId': {$eq: req.body.user_Id}
+                    }, {
+                        $pull: {requestReceived: {
+                            user_Id: req.body.user_Id
+                        }},
+                        $inc: {totalFriendRequest: -1}
+                    }, (err, count) => {
+                        console.log(count)
+                        callback(err, count);
+                    });
+                }
+            },
 
 
-                // // cancel request for the sender
-                // function (callback) {
-                //     // all this will happen only if user clicks on cancel
-                //     if (req.body.user_Id) {
-                //         // updating receiver friendlist
-                //         Users.updateOne({
-                //             '_id': req.body.user_Id,
-                //             // checks that username  exists using equal operator '$eq' in mongodb
-                //             'sentFriendRequest.username': {$eq: req.user.username }
-                //         }, {
+                // cancel request for the sender
+                function (callback) {
+                    // all this will happen only if user clicks on cancel
+                    if (req.body.user_Id) {
+                        // updating receiver friendlist
+                        Users.updateOne({
+                            '_id': req.body.user_Id,
+                            // checks that username  exists using equal operator '$eq' in mongodb
+                            'sentFriendRequest.username': {$eq: req.user.username }
+                        }, {
                             
-                //            //it will pull out the userId
-                //             $pull: {sentFriendRequest: {
-                //                     username: req.user.username
-                //                 }}
+                           //it will pull out the userId
+                            $pull: {sentFriendRequest: {
+                                    username: req.user.username
+                                }}
                         
                             
-                //         }, (err, count) => {
-                //             callback(err, count);
-                //         })
-                //     }
-                // }
+                        }, (err, count) => {
+                            callback(err, count);
+                        })
+                    }
+                },
 
             // check if the id in the body is available on the database
             //then it will look fot he document whose document is equal to req.body.pmId
