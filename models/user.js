@@ -27,16 +27,15 @@ const userSchema = mongoose.Schema({
     }],
     // if user cancels a request its value will be reduced by o1 otherwise incremented by 1 if a new request is received
     totalFriendRequest: {type: Number, default: 0},
-    gender: {type: String, default: ''},
     country: {type: String, default: ''},
-    mantra: {type: String, default: ''},
-    favFood: [{
+    about: {type: String, default: ''},
+    favouriteFood: [{
         teamName: {type: String, default: ''}
     }],
-    favSport: [{
+    personalHobby: [{
         playerName: {type: String, default: ''}
     }],
-    favClub: [{
+    favouriteGroup: [{
         clubName: {type: String}
     }]
 });
