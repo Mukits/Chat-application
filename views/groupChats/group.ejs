@@ -153,7 +153,7 @@
                                 <div class="message_write">
                                     <form id="message-form" method="post">
                                         <!-- gets the group name from the groupcht controller -->
-                                        <input type="hidden" id="name" value="<%= name %>">
+                                        <input type="hidden" name="name" id="name" value="<%= name %>">
                                         <!-- gets the username or fullname depending on which one is set, from the user -->
                                         <input type="hidden" id="sender" name="sender" value="<%= user.username %>">
                                         <textarea class="form-control" name="message" id="msg"

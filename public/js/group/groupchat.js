@@ -52,6 +52,7 @@ $(document).ready(function () {
         $("#messages").append(message);
     });
 
+    // this is from where the message sent
     $('#message-form').on('submit', function (e) {
         // to prevent the form to reload after its submitted
         e.preventDefault();
@@ -66,5 +67,18 @@ $(document).ready(function () {
         }, function () {
             $('#msg').val('');
         });
+
+        // we adding ajax method to post the data to the database
+        $.ajax({
+            url:'/group/'+room,
+            type:'POST',
+            data: {
+                message:msg,
+                name: room
+            },
+            success: function(){
+                $('#msg').val('');
+            }
+        })
     });
 });

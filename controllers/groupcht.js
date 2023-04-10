@@ -1,5 +1,5 @@
 // Users is registered as a dependency in the container file
-module.exports = function (async, Users,Message, friendRequest) {
+module.exports = function (async, Users,Message, friendRequest, Groupmex) {
     return {
         SetRouting: function (router) {
             router.get('/group/:groupName', this.groupPage);
@@ -70,7 +70,30 @@ module.exports = function (async, Users,Message, friendRequest) {
         // to post the data to the database from the groupPage friend request
         groupPagePost: function (req, res) {
             // those two functions will run in parallel wihtout waiting ones finished
-            friendRequest.PostReq(req,res,'/group/'+req.params.name)
+            friendRequest.PostReq(req,res,'/group/'+req.params.name);
+            async.parallel([
+                function(callback){
+                    if(req.body.message){
+                        const group = new Groupmex();
+                        // getting the user id since we referenced user in the Groupmex model
+                        group.sender = req.user._id;
+                        // getting the message from the body
+                        group.body = req.body.message;
+                        // getting the group name hidden field from the body
+                        group.name = req.body.name;
+                        // setting the createdat value to the current time and date
+                        group.createdAt = new Date();
+                        // saving the data to the db
+                        group.save((err,msg)=>{
+                            console.log("the following message has been saved into db");
+                            console.log(msg);
+                            callback(err,msg);
+                        })
+                    }
+                }
+            ],(err,results)=>{
+                res.render('/group/'+req.params.name);
+            });
         },
         logout: function(req,res){
             // logout method available through passport
