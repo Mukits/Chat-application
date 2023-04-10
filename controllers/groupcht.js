@@ -59,11 +59,24 @@ module.exports = function (async, Users,Message, friendRequest, Groupmex) {
                         }
                     )
                 },
+
+                function(callback){
+                    // to retrieve the messages inside the Groupmex collection
+                    Groupmex.find({})
+                        .populate('sender')
+                        .exec((err,result)=>{
+                            callback(err,result)
+                        });
+                    
+                }
             ], (err, results) => {
+                // stores the results of each of the functions above starting from results[0] which is for the first function
                 const firstResult = results[0];
                 const secondResult = results[1];
+                const thirdResult = results[2];
                 //console.log(firstResult);
-                res.render('groupChats/group', { title: 'Chat-application - Group', user: req.user, name: name, data: firstResult, pm: secondResult });
+                // SETS THE TITLE AND makes data available to the group.ejs file
+                res.render('groupChats/group', { title: 'Chat-application - Group', user: req.user, name: name, data: firstResult, pm: secondResult, groupMex: thirdResult });
             });
 
         },

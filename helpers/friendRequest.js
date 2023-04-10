@@ -119,7 +119,7 @@ return {
                         }},
                         $inc: {totalFriendRequest: -1}
                     }, (err, count) => {
-                        console.log("friend request canceled for the receiver totalFriend request count decremented")
+                        console.log("friend request canceled for the receiver totalFriend request count decremented and requestReceived pulled")
                         console.log(count)
                         callback(err, count);
                     });

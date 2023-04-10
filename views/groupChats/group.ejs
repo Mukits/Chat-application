@@ -121,18 +121,30 @@
                                     <ul id="messages" class="list-unstyled">
                                         <!-- img-circle bootstrap class -->
                                         <!-- pull left will always position it left -->
-                                        <!-- <li class = "left">
+                                        <!-- the lodash function is available thanks to it being saved as dependency in container  and resolved in server -->
+                                        <!-- lodash was also declared as global in server.js with app.locals._ = _ declaration  -->
+                                        <!-- so that it could be used on all the views file -->
+                                        <!-- for each data in groupMex it will loop to show all messages -->
+                                        <% _.forEach(groupMex, function(value) { %>
+                                            <!-- this if statement will allow us to display messages for specific groups -->
+                                            <% if(name === value.name) {%>
+
+                                        <li class = "left">
                                         
                                         <span class="chat-img1 pull-left">
                                            
                                             <img src="http://placehold.it/300x300" class="img-circle" alt = "">
                                         </span> 
                                         <div class="chat-body1">
-                                            <span class="chat-name">Username</span>
+                                            <!-- username of the sender -->
+                                            <span class="chat-name"><%= value.sender.username %></span>
                                             <br>
-                                            Message Body
+                                            <!-- the body containing the text of the sender -->
+                                            <%= value.body %>
                                         </div>
-                                    </li> -->
+                                    </li>
+                                    <%}%>
+                                    <% }) %>
                                     </ul>
                                     <script id="message-template" type="text/template">
                                 <li class = "left">
