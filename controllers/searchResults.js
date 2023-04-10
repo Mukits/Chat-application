@@ -1,11 +1,11 @@
-module.exports = function(async, group){
+module.exports = function(async, group, Users){
     return {
         SetRouting: function(router){
             // ROUTES FOR ACTION BUTTONS
             router.get('/searchResults', this.getResults);
             router.post('/searchResults', this.postResults);
             
-            
+            router.get('/members',this.showMembers)
         },
         
         getResults: function(req, res){
@@ -31,6 +31,27 @@ module.exports = function(async, group){
                 }
                 
                 res.render('searchResults', {title: 'Chat-application - searchResults', user: req.user, parts: dataChunk});
+            })
+        },
+        showMembers: function(req,res){
+            async.parallel([
+                function(callback){
+                    // search either by name or country using or operator, if country is false then name will be true
+                    Users.find({}, (err, result) => {
+                       callback(err, result); 
+                    });
+                }
+            ], (err, results) => {
+                const res1 = results[0];
+                
+                const dataChunk  = [];
+                // this is to divide the data in blocks of 3 so that they can be display on the screen in rows of 3
+                const chunkSize = 4;
+                for (let i = 0; i < res1.length; i += chunkSize){
+                    dataChunk.push(res1.slice(i, i+chunkSize));
+                }
+                
+                res.render('membersPage', {title: 'Chat-application - Members', user: req.user, parts: dataChunk});
             })
         }
     }
