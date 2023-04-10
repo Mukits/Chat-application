@@ -1,9 +1,12 @@
 // passing tha models Users and Message 
-module.exports = function(async, Users, Message){
+// formidable to send the data
+module.exports = function(async, Users, Message, aws, formidable){
     return {
         SetRouting: function(router){
             router.get('/setup/profile', this.getMyProfilePage);
-            
+            // the image will be uploaded through this route
+            // asw.Upload.any() will allow us to use data from AWSUpload helper file
+            router.post('/imageUpload', aws.Upload.any(), this.userImageUp);
         },
         getMyProfilePage: function(req,res){
             async.parallel([
@@ -67,6 +70,18 @@ module.exports = function(async, Users, Message){
                 res.render('user/myProfile', { title: 'Chat-application - My Profile', user: req.user, data: firstResult, pm: secondResult });
             });
         
-        }
+        },
+        // events from formidable
+    userImageUp: function(req,res){
+        const upForm = new formidable.IncomingForm();
+        upForm.on('file', (field,file)=>{
+
+        });
+       upForm.on('error',(err)=>{});
+       upForm.on('end', () =>{
+        console.log('upload on s3 bucket successafull');
+       });
+       upForm.parse(req);
+    }
     }
 }
