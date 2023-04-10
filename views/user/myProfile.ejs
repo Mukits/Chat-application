@@ -34,7 +34,7 @@
                             <div class="col-md-12">
                                 <div class="profile-sidebar">
                                         <div class="img-container">
-                                            <img src="#" class="img-responsive img-user" id="show_img">
+                                            <img src="https://chatapplicationmukitur.s3.amazonaws.com/<%= user.userImage.replace("C:\\fakepath\\", "") %>" class="img-responsive img-user" id="show_img">
                                         </div>
                                 
                                     <div class="profile-usertitle">
@@ -117,7 +117,7 @@
                                     <label style="color:#520e79 !important">Add Profile Photo</label><br>
                                     <input type="hidden" id="user-image" value="<%= user.userImage %>">
                                     <button class="btn btn-lg add-btn" style="background-color:#520e79 !important; color:white" type="button">Add Profile Image</button>
-                                    <input type="file" class="form-control" name="upload" id="addPhoto" style="display: none">
+                                    <input type="file" class="form-control" name="upload" id="addPhoto" >
                                     <span id="completed"></span>
                                 </div>
 
