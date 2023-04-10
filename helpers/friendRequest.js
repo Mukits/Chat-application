@@ -115,10 +115,11 @@ return {
                         'requestReceived.userId': {$eq: req.body.user_Id}
                     }, {
                         $pull: {requestReceived: {
-                            user_Id: req.body.user_Id
+                            userId: req.body.user_Id
                         }},
                         $inc: {totalFriendRequest: -1}
                     }, (err, count) => {
+                        console.log("friend request canceled for the receiver totalFriend request count decremented")
                         console.log(count)
                         callback(err, count);
                     });
@@ -144,8 +145,11 @@ return {
                         
                             
                         }, (err, count) => {
+                            console.log("friend request canceled for the sender sentFriendRequest deleted")
+                            console.log(count)
+
                             callback(err, count);
-                        })
+                        });
                     }
                 },
 

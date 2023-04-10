@@ -19,9 +19,7 @@
             <span class="glyphicon fa fa-bell nav-glyphicon"></span><b class="caret"></b>
             <!-- if the request of the friend request is greater than 0 than show the notification -->
             <% if(data.totalFriendRequest> 0 ) {%>
-              <span class="label label-primary nav-label-icon">
-                <%=data.totalFriendRequest %>
-              </span>
+              <span class="label label-primary nav-label-icon"><%=data.requestReceived.length %></span>
 
               <% } else { %>
                 <span class="label label-primary nav-label-icon" style="display:none"></span>
@@ -71,7 +69,8 @@
                               </div>
                               <div class="col-md-6 col-sm-6 col-xs-6">
                                   <input type="hidden" name="user_Id" id="user_Id" value="<%= val.userId._id %>">
-                                  <button type="submit" name="cancel" class="btn drop-cancel remove" id="cancel_friend"><i class="fa fa-times" aria-hidden="true"></i> Cancel</button>
+                                  <button type="submit" name="cancel" class="btn drop-cancel remove" id="cancel_friend">
+                                  <i class="fa fa-times" aria-hidden="true"></i> Cancel</button>
                               </div>
                               </div>
                             </div>
@@ -85,7 +84,7 @@
                       <% }) %>
                       <% } else { %>
                         <p class="text-center">No pending requests</p>
-                      <% }%>
+                      <% } %>
                 </div>
               </div>
             </li>

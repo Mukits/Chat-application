@@ -99,7 +99,7 @@ $(document).ready(function () {
         $('#refresh').load(location.href + ' #refresh');
     });
 
-    $('#cancel_friends').on('click', function () {
+    $('#cancel_friend').on('click', function () {
         // gets the method from an input field
         var user_Id = $('#user_Id').val();
 
