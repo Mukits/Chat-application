@@ -1,12 +1,13 @@
 // passing tha models Users and Message 
 // formidable to send the data
-module.exports = function(async, Users, Message, aws, formidable){
+module.exports = function(async, Users, Message, aws,friendRequest, formidable){
     return {
         SetRouting: function(router){
             router.get('/setup/profile', this.getMyProfilePage);
             // the image will be uploaded through this route
             // asw.Upload.any() will allow us to use data from AWSUpload helper file
             router.post('/imageUpload', aws.Upload.any(), this.userImageUp);
+            router.post('/setup/profile',this.postMyProfileData);
         },
         getMyProfilePage: function(req,res){
             async.parallel([
@@ -82,6 +83,37 @@ module.exports = function(async, Users, Message, aws, formidable){
         console.log('upload on s3 bucket successafull');
        });
        upForm.parse(req);
+    },
+    postMyProfileData: function(req,res){
+        friendRequest.PostReq(req,res,'/setup/profile'+req.params.name);
+        async.waterfall([
+            function(callback){
+                Users.findOne({'_id': req.user._id},(err,result)=>{
+                    callback(err,result);
+                })
+            },
+            function(result,callback){
+                Users.updateOne({
+                    '_id': req.user._id
+                },
+                {
+                    username:req.body.username,
+                    fullname: req.body.fullname,
+                    about:req.body.about,
+                    country: req.body.country,
+                    userImage: req.body.upload
+                },
+                {
+                    // if the field does not already exist its goin to add it
+                    upsert: true
+                }, (err,result)=>{
+                    // the data was successfully modified to the following
+                    console.log("the profile data was successfully modified");
+                    console.log(result);
+                    res.redirect('/setup/profile')
+                })
+            }
+        ]);
     }
     }
 }
