@@ -26,6 +26,8 @@ $(document).ready(function () {
                 }
             })
         }
+        // will show the image immediately when there is a change on the addPhoto tag
+        showImg(this);
     });
 
 $('#profile').on('click', function(){
@@ -69,3 +71,16 @@ $('#profile').on('click', function(){
 });
 
 });
+
+function showImg(input){
+    if(input.files && input.files[0]){
+        // lets us read the files inside our computers asyncronously/independently
+        var reader = new FileReader();
+        // onload is called when read operation is completed
+        reader.onload = function(e){
+// e.target.result will contain the file
+            $('#show_img').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
