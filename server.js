@@ -15,7 +15,7 @@ const {Global} = require('./helpers/Global');
 
 const container = require('./container');
 //parameters are the controllers we are creating
-container.resolve(function (users, _, admin, home, groupcht, searchResults, privateChat) {
+container.resolve(function (users, _, admin, home, groupcht, searchResults, privateChat, myProfile) {
 
     mongoose.set('useFindAndModify', false);
     mongoose.set('useCreateIndex', true);
@@ -37,6 +37,7 @@ container.resolve(function (users, _, admin, home, groupcht, searchResults, priv
         require('./socketio/friendRequestSnd')(io);
         require('./socketio/globalrooms')(io, Global,_);
         require('./socketio/privatemessage')(io);
+
         // require('./socket/globalroom')(io, Global, _);
         // require('./socket/privatemessage')(io);
 
@@ -48,6 +49,7 @@ container.resolve(function (users, _, admin, home, groupcht, searchResults, priv
         groupcht.SetRouting(router);
         searchResults.SetRouting(router);
         privateChat.SetRouting(router);
+        myProfile.SetRouting(router);
         app.use(router);
 
         app.use(function (req, res) {
