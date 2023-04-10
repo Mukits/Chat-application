@@ -23,5 +23,9 @@ module.exports = function(io)
             io.emit('message display',{});
             callback();
         });
+        socket.on('refresh', function(){
+            // emit to everyone including sender
+            io.emit('new load',{});
+        });
     });
 }

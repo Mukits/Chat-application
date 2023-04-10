@@ -21,7 +21,10 @@ $(document).ready(function(){
         socket.emit('join private',params, function(){
         console.log('user joined pm');
         });
-        
+        socket.on('new load',function(){
+            // when a user joins the private chat the element with id refresh will be reloaded
+            $('#refresh').load(location.href + ' #refresh');
+        })
 
         $(document).on('click','#notificationLink',function(){
             // using this to get the attribute from the currecntly selected ancor tag 
@@ -35,7 +38,8 @@ $(document).ready(function(){
 
                 }
             })
-        });     
+        }); 
+        socket.emit('refresh',{});  
     });
 });
 

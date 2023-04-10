@@ -118,6 +118,20 @@ module.exports = function (async, group, _, Users,Message) {
                         console.log(count);
                         callback(err,count);
                     });
+                },
+                function(callback){
+                    if(req.body.pmId){
+                        Message.updateOne({
+                            '_id': req.body.pmId
+                        },
+                        {
+                            "isRead": true
+                        },(err,done)=>{
+                            console.log("this is the notification value been set to read ");
+                            console.log(done);
+                            callback(err,done);
+                        })
+                    }
                 }
             ],(err,results) => {
                 res.redirect('/home')

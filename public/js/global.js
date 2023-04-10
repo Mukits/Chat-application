@@ -12,7 +12,7 @@ $(document).ready(function () {
             name: name,
             img: img
         });
-
+// emit this to everyone connected
         socket.on('message display',function(){
             $('#refresh').load(location.href + ' #refresh');
         });
