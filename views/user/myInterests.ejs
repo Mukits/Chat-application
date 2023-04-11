@@ -114,9 +114,12 @@
                         
                                 <h3 class="user-display-head" style="color:#520e79 !important">Personal Hobbies</h3>
                                 <hr />
-                                <p style="margin-bottom:30px;">
-                                    <span class="glyphicon glyphicon-check"></span>
-                                </p>
+                                <% _.forEach(user.personalHobby, function(value){%>
+                                    <p style="margin-bottom:30px;">
+                                        <span class="glyphicon glyphicon-check"></span>
+                                        <%= value.hobbyName%>
+                                    </p>
+                                    <%})%>
                         
                                 <div class="form-group ad-30" style="margin-top:18px;">
                                     <div class="input-group">
