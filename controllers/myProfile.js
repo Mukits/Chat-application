@@ -147,8 +147,8 @@ module.exports = function(async, Users, Message, aws,friendRequest, formidable){
     mySummaryPage: function(req,res){
         async.parallel([
             function (callback) {
-                //it will search for user with username req.user.username
-                Users.findOne({ 'username': req.user.username })
+                //gets the username from the URL
+                Users.findOne({ 'username': req.params.name })
                     // its going to then populate that user his data in object requestReceived.userId
                     .populate('requestReceived.userId')
                     .exec((err, result) => {

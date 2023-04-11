@@ -34,15 +34,16 @@
                             <div class="col-md-12">
                                 <div class="profile-sidebar">
                                         <div class="img-container">
-                                            <img src="https://chatapplicationmukitur.s3.amazonaws.com/<%= user.userImage.replace("C:\\fakepath\\", "") %>" class="img-responsive img-user" id="show_img">
+                                            <img src="https://chatapplicationmukitur.s3.amazonaws.com/<%= data.userImage.replace("C:\\fakepath\\", "") %>" class="img-responsive img-user" id="show_img">
                                         </div>
                                 
                                     <div class="profile-usertitle">
                                         <div class="profile-usertitle-name">
-                                          <%= user.fullname %>
+                                            <!-- data is from the user displayed in the URL -->
+                                          <%= data.fullname %>
                                         </div>
                                         <div class="profile-usertitle-job">
-                                          #<%= user.username%>
+                                          #<%= data.username%>
                                         </div>
                                     </div>
                               
@@ -50,7 +51,7 @@
                                         <ul class="nav">
                                             <li>
                                                 <li class="active">
-                                                <a href="/profile/<%=user.username%>" style="color:#520e79 !important">
+                                                <a href="/profile/<%=data.username%>" style="color:#520e79 !important">
                                                     <i class="fa fa-home" style="color:#520e79 !important"></i>Summary
                                                 </a>
                                             </li>
@@ -88,7 +89,7 @@
                                 <h3 class="user-display-head" style="color:#520e79 !important">Favourite Food</h3>
                                 <hr />
                                 <!-- looping through the arraY FAVOURITE FOOD -->
-                                <% _.forEach(user.favouriteFood, function(value){%>
+                                <% _.forEach(data.favouriteFood, function(value){%>
                                 <p style="margin-bottom:30px;">
                                     <span class="glyphicon glyphicon-check"></span>
                                     <%= value.foodName%>
@@ -105,7 +106,7 @@
                                 <h3 class="user-display-head" style="color:#520e79 !important">Personal Hobbies</h3>
                                 <hr />
                                  <!-- looping through the arraY hobbies -->
-                                <% _.forEach(user.personalHobby, function(value){%>
+                                <% _.forEach(data.personalHobby, function(value){%>
                                     <p style="margin-bottom:30px;">
                                         <span class="glyphicon glyphicon-check"></span>
                                         <%= value.hobbyName%>
@@ -123,7 +124,7 @@
                                 <h3 class="user-display-head" style="color:#520e79 !important">Favourite Group</h3>
                                 <hr />
                                  <!-- looping through the arraY favouriteGroup -->
-                                 <% _.forEach(user.favouriteGroup, function(value){%>
+                                 <% _.forEach(data.favouriteGroup, function(value){%>
                                     <p style="margin-bottom:30px;">
                                         <span class="glyphicon glyphicon-check"></span>
                                         <%= value.groupName%>
