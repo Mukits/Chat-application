@@ -85,7 +85,8 @@ module.exports = function(async, Users, Message, aws,friendRequest, formidable){
        upForm.parse(req);
     },
     postMyProfileData: function(req,res){
-        friendRequest.PostReq(req,res,'/setup/profile'+req.params.name);
+        // this is for adding accepting or rejecting friend request o nthis page
+        friendRequest.PostReq(req,res,'/setup/profile');
         async.waterfall([
             function(callback){
                 Users.findOne({'_id': req.user._id},(err,result)=>{

@@ -72,7 +72,32 @@ module.exports = function(async, Users, Message,friendRequest){
      
     
         postMyInterestPage: function(req,res){
-
+            // this is for adding accepting or rejecting friend request on this page
+            friendRequest.PostReq(req,res,'/setup/myInterests');
+            async.parallel([
+                function(callback){
+                    // trigger only when we have data for this field
+                    if(req.body.favFood){
+                        Users.updateOne({
+                            '_id':req.user._id,
+                            // if the data already exists the data will not be saved
+                           'favFood.foodName': {$ne: req.body.favFood}
+                        },{
+                            $push: {
+                                favouriteFood: {
+                                // req  is  from the ajax request in the client side js script
+                                foodName: req.body.favFood}
+                            }
+                        }, (err,ress1)=>{
+                            console.log("fav food was pushed the following is result");
+                            console.log(ress1);
+                            callback(err,ress1);
+                        })
+                    }
+                }
+            ], (err,results)=>{
+                res.redirect('/setup/myInterests');
+            });
         }
             
       

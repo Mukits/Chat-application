@@ -30,13 +30,13 @@ const userSchema = mongoose.Schema({
     country: {type: String, default: ''},
     about: {type: String, default: ''},
     favouriteFood: [{
-        teamName: {type: String, default: ''}
+        foodName: {type: String, default: ''}
     }],
     personalHobby: [{
-        playerName: {type: String, default: ''}
+        hobbyName: {type: String, default: ''}
     }],
     favouriteGroup: [{
-        clubName: {type: String}
+        groupName: {type: String}
     }]
 });
 
