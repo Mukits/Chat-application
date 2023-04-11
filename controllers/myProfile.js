@@ -93,6 +93,27 @@ module.exports = function(async, Users, Message, aws,friendRequest, formidable){
                 })
             },
             function(result,callback){
+                if(req.body.upload === null || req.body.upload === ''){
+                Users.updateOne({
+                    '_id': req.user._id
+                },
+                {
+                    username:req.body.username,
+                    fullname: req.body.fullname,
+                    about:req.body.about,
+                    country: req.body.country,
+                    userImage: result.userImage
+                },
+                {
+                    // if the field does not already exist its goin to add it
+                    upsert: true
+                }, (err,result)=>{
+                    // the data was successfully modified to the following
+                    console.log("the profile data was successfully modified");
+                    console.log(result);
+                    res.redirect('/setup/profile')
+                })
+            } else if(req.body.upload !== null || req.body.upload !== ''){
                 Users.updateOne({
                     '_id': req.user._id
                 },
@@ -112,6 +133,9 @@ module.exports = function(async, Users, Message, aws,friendRequest, formidable){
                     console.log(result);
                     res.redirect('/setup/profile')
                 })
+
+
+            }
             }
         ]);
     }
