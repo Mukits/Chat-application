@@ -80,8 +80,8 @@ module.exports = function(async, Users, Message,friendRequest){
                     if(req.body.favFood){
                         Users.updateOne({
                             '_id':req.user._id,
-                            // if the data already exists the data will not be saved
-                           'favFood.foodName': {$ne: req.body.favFood}
+                            // if the data on the request already exists the data will not be saved
+                           'favouriteFood.foodName': {$ne: req.body.favFood}
                         },{
                             $push: {
                                 favouriteFood: {
