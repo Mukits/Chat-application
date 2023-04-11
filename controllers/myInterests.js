@@ -94,7 +94,35 @@ module.exports = function(async, Users, Message,friendRequest){
                             callback(err,ress1);
                         })
                     }
+                },
+                
+            ], (err,results)=>{
+                res.redirect('/setup/myInterests');
+            });
+
+            async.parallel([
+                
+                function(callback){
+                    // trigger only when we have data for this field
+                    if(req.body.hobbies){
+                        Users.updateOne({
+                            '_id':req.user._id,
+                            // if the data on the request already exists the data will not be saved
+                           'personalHobby.hobbyName': {$ne: req.body.hobbies}
+                        },{
+                            $push: {
+                                personalHobby:  {
+                                // req  is  from the ajax request in the client side js script
+                                hobbyName: req.body.hobbies}
+                            }
+                        }, (err,ress2)=>{
+                            console.log("hobby was pushed the following is result");
+                            console.log(ress2);
+                            callback(err,ress2);
+                        })
+                    }
                 }
+                
             ], (err,results)=>{
                 res.redirect('/setup/myInterests');
             });
@@ -104,3 +132,5 @@ module.exports = function(async, Users, Message,friendRequest){
     
     }
 }
+
+
