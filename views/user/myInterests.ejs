@@ -54,13 +54,13 @@
                                                     Overview
                                                 </a>
                                             </li>
-                                            <li class="active">
+                                            <li >
                                                 <a href="#" style="color:#520e79 !important">
                                                     <i class="fa fa-user" style="color:#520e79 !important"></i>
                                                     Profile
                                                 </a>
                                             </li>
-                                            <li>
+                                            <li class="active">
                                                 <a href="/setup/myInterests" style="color:#520e79 !important">
                                                     <i class="fa fa-check" style="color:#520e79 !important"></i>
                                                     Interests
@@ -79,54 +79,75 @@
 
 
                     <!--MIDDLE-->
-                    <div class="col-sm-5 col-md-6 mob-50">
+                    <div class="col-sm-8 col-md-9 mob-50">
+                        <!-- all the sections are wrapped inside one form -->
+                        <form method="post">
                         
-                        <div class="profile-signup">
-<!-- if errors with validation occur here will be displayed from user/myProfile.js -->
-                            <span id = "invalid" class="text-center"></span>
-
-                            <form class="form" role="form" method="POST" id="form" action="#">
-
-                                <h3 style="margin-top:0px; color:#520e79 !important">Personal Information</h3>
+                        <div >
+                            <div class="user-display">
+                        
+                                <h3 class="user-display-head" style="color:#520e79 !important">Favourite Food</h3>
                                 <hr />
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <input id="username" class="form-control input-lg" name="fullname" type="text" placeholder="Username" value="<%= user.username %>">
+                                <p style="margin-bottom:30px;">
+                                    <span class="glyphicon glyphicon-check"></span>
+                                </p>
+                        
+                                <div class="form-group ad-30" style="margin-top:18px;">
+                                    <div class="input-group">
+                                    <input id="favFood" class="form-control add-items" name="favFood" type="text" style="">
+                                        
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default add-items-btn" id="favFoodBtn" style="font-weight:bold; background-color:#520e79; color:#ffffff">Add Club</button>
+                                        </span>
                                     </div>
-        
-                                    <div class="col-md-12">
-
-                                        <input id="fullname" class="form-control input-lg" name="fullname" type="text" placeholder="Fullname" value="<%= user.fullname %>">
-                                    </div>
-                                    <div class="col-md-12">
-                                        <input id="country" class="form-control input-lg" name="country" type="text" placeholder="City, State, Country" value="<%= user.country %>">
-                                    </div>
-
                                 </div>
-                               
-
-
-                                <div class="" style="margin-top:20px">
-                                <label style="color:#520e79 !important">About</label><br>
-                                    <textarea name="about" id="about" class="form-control input-lg" rows="5" placeholder="<%= user.about %>"></textarea>
-                                </div>
-                                
-        
-
-                                <div>
-                                    <label style="color:#520e79 !important">Add Profile Photo</label><br>
-                                    <input type="hidden" id="user-image" value="<%= user.userImage %>">
-                                    <button class="btn btn-lg add-btn" style="background-color:#520e79 !important; color:white" type="button">Add Profile Image</button>
-                                    <input type="file" class="form-control" name="upload" id="addPhoto" >
-                                    <span id="completed"></span>
-                                </div>
-
-                                <input type="submit" id="profile" value="SAVE PROFILE" class="btn btn-lg btn-default btn-block save-profile-btn" name="submit" style="background-color:#520e79 !important; color:white !important">
-
-                            </form>
-
+                            </div>
                         </div>
 
+                         
+                        <div style="margin-top:25px;">
+                            <div class="user-display">
+                        
+                                <h3 class="user-display-head" style="color:#520e79 !important">Personal Hobbies</h3>
+                                <hr />
+                                <p style="margin-bottom:30px;">
+                                    <span class="glyphicon glyphicon-check"></span>
+                                </p>
+                        
+                                <div class="form-group ad-30" style="margin-top:18px;">
+                                    <div class="input-group">
+                                    <input id="favClub" class="form-control add-items" name="favClub" type="text" style="">
+                                        
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default add-items-btn" id="favClubBtn" style="font-weight:bold; background-color:#520e79; color:#ffffff">Add Club</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                         
+                        <div style="margin-top:25px;">
+                            <div class="user-display">
+                        
+                                <h3 class="user-display-head" style="color:#520e79 !important">Favourite Group</h3>
+                                <hr />
+                                <p style="margin-bottom:30px;">
+                                    <span class="glyphicon glyphicon-check"></span>
+                                </p>
+                        
+                                <div class="form-group ad-30" style="margin-top:18px;">
+                                    <div class="input-group">
+                                    <input id="favClub" class="form-control add-items" name="favClub" type="text" style="">
+                                        
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default add-items-btn" id="favClubBtn" style="font-weight:bold; background-color:#520e79; color:#ffffff">Add Club</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     </div>
 
 
@@ -150,6 +171,7 @@ crossorigin="anonymous"></script>
 <script src="/js/global.js"></script>
 <script src="/js/notificationLink.js"></script>
 <script src="/js/deparam.js"></script>
-<script src="/js/user/myProfile.js"></script>
+<script src="/js/user/myInterests.js"></script>
+
 
 </html>

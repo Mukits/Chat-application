@@ -23,13 +23,13 @@
 
 .profile-usertitle-name {
     color: #520e79;
-    font-size: 16px;
+    font-size: 25px;
     font-weight: 600;
     margin-bottom: 7px;
 }
 
 .profile-usertitle-job {
-    color: #929292;
+    color: #757476;
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 15px;
@@ -109,4 +109,17 @@
 .img-user{
     width:90%;
     margin-left:5%;
+}
+
+.user-display {
+    background: #fff;
+    -webkit-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
+    -moz-box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
+    box-shadow: 0px 0px 19px 0px rgba(0,0,0,0.16);
+    padding: 20px;
+}
+
+.user-display-head {
+    margin-top: 0px;
+    color: #520e79;
 }
