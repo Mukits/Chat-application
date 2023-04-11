@@ -57,7 +57,7 @@
                                                     </div>
                                                     <div class="footer">
                                                         <i class="fa fa-mail-forward"></i>
-                                                        <a href="#" style=" color: #520e79;">
+                                                        <a href="/profile/<%= user.username%>" style=" color: #520e79;">
                                                             View My Profile
                                                         </a>
                                                     </div>
@@ -216,8 +216,8 @@
                                                         value="<%= user.username %>">
                                                     <button type="submit" id="friend-add" class="btn add"><i
                                                             class="fa fa-user"></i> Add Friend</button>
-
-                                                    <a id="nameLink" class="btn ">View Profile</a>
+<!-- we added the link to nameLink in the groupchat.js in the public folder -->
+                                                    <a id="nameLink" class="btn">View Profile</a>
 
                                                     <div id="myTest">
 

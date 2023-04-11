@@ -61,4 +61,36 @@ $(document).ready(function(){
         }
         
     });
+
+    $('#favGroupBtn').on('click',function(){
+        var favGroup = $('#favGroup').val();
+        var valid = true;
+        if( favGroup == ''){
+            valid = false;
+            $('#invalid').html('<div class="alert alert-danger">You cannot update details to an empty value</div>');
+        } else {
+            $('#invalid').html('');
+        }
+        if(valid == true){
+            // POSTING THE DATA TO THE SERVER
+            $.ajax({
+                url:'/setup/myInterests',
+                type: 'POST',
+                data:{
+                    favGroup : favGroup
+                },
+                success: function(){
+                    // empty the input field
+                    $('#favGroup').val('');
+                    setTimeout(function(){
+                        window.location.reload();
+                    },200);
+                }
+
+            })
+        } else {
+            return false;
+        }
+        
+    });
 });

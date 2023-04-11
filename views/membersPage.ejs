@@ -39,7 +39,7 @@
                             <%= user.username %><span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Action</a></li>
+                            <li><a href="/setup/profile"><span class="fa fa-user "> </span> My Profile</a></li>
                             <li role="separator" class="divider"></li>
                             <!-- uses font awesome predefined sign out sign -->
                             <li><a href="/logout"><span class="fa fa-sign-out"></span>Logout</a></li>
@@ -106,8 +106,8 @@
                                             <div class="item col-md-3">
                                                 <a style="text-decoration:none; " href="#">
                                                     <div class="thumbnail">
-                                                        <img src="https://placehold.it/500x500"
-                                                            alt="image">
+                                                        <img src="https://chatapplicationmukitur.s3.amazonaws.com/<%= val2.userImage.replace("C:\\fakepath\\", "") %>" class="img-responsive img-user" id="show_img"
+                                                            alt="userImage">
                                                         <div class="caption">
                                                             <div class="row">
                                                                 <div class="col-xs-12 col-md-12">

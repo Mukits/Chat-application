@@ -74,6 +74,7 @@ module.exports = function(async, Users, Message,friendRequest){
         postMyInterestPage: function(req,res){
             // this is for adding accepting or rejecting friend request on this page
             friendRequest.PostReq(req,res,'/setup/myInterests');
+            // THIS PARALLEL GETS THE DATA FROM THE AJAX REQUEST AND UPDATED THE DB FOR FAV FOOD
             async.parallel([
                 function(callback){
                     // trigger only when we have data for this field
@@ -99,7 +100,7 @@ module.exports = function(async, Users, Message,friendRequest){
             ], (err,results)=>{
                 res.redirect('/setup/myInterests');
             });
-
+ // THIS PARALLEL GETS THE DATA FROM THE AJAX REQUEST AND UPDATED THE DB FOR HOBBIES
             async.parallel([
                 
                 function(callback){
@@ -119,6 +120,33 @@ module.exports = function(async, Users, Message,friendRequest){
                             console.log("hobby was pushed the following is result");
                             console.log(ress2);
                             callback(err,ress2);
+                        })
+                    }
+                }
+                
+            ], (err,results)=>{
+                res.redirect('/setup/myInterests');
+            });
+ // THIS PARALLEL GETS THE DATA FROM THE AJAX REQUEST AND UPDATED THE DB FOR FAV GROUP
+            async.parallel([
+                
+                function(callback){
+                    // trigger only when we have data for this field
+                    if(req.body.favGroup){
+                        Users.updateOne({
+                            '_id':req.user._id,
+                            // if the data on the request already exists the data will not be saved
+                           'favouriteGroup.groupName': {$ne: req.body.favGroup}
+                        },{
+                            $push: {
+                                favouriteGroup:  {
+                                // req  is  from the ajax request in the client side js script
+                                groupName: req.body.favGroup}
+                            }
+                        }, (err,ress3)=>{
+                            console.log("fav group was pushed the following is result");
+                            console.log(ress3);
+                            callback(err,ress3);
                         })
                     }
                 }
