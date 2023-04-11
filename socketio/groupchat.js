@@ -23,7 +23,8 @@ module.exports = function (io, Users) {
             io.to(message.room).emit('newData', {
                 text: message.text,
                 room: message.room,
-                sender: message.sender
+                sender: message.sender,
+                image: message.userImage
             });
             callback();
         });

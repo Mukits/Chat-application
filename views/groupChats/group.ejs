@@ -41,7 +41,8 @@
 
                                                 </div>
                                                 <div class="user cover-img">
-                                                    <img src="https://placehold.it/300x300" class="img-circle" alt="">
+                                                    <img src="https://chatapplicationmukitur.s3.amazonaws.com/<%= user.userImage.replace("C:\\fakepath\\", "")%>" class="img-circle" alt = "">
+
                                                 </div>
                                                 <div class="content">
                                                     <div class="main">
@@ -133,7 +134,7 @@
                                         
                                         <span class="chat-img1 pull-left">
                                            
-                                            <img src="http://placehold.it/300x300" class="img-circle" alt = "">
+                                            <img src="https://chatapplicationmukitur.s3.amazonaws.com/<%= value.sender.userImage.replace("C:\\fakepath\\", "")%>" class="img-circle" alt = "">
                                         </span> 
                                         <div class="chat-body1">
                                             <!-- username of the sender -->
@@ -151,7 +152,7 @@
                                         
                                     <span class="chat-img1 pull-left">
                                        
-                                        <img src="http://placehold.it/300x300" class="img-circle" alt = "">
+                                        <img src="https://chatapplicationmukitur.s3.amazonaws.com/{{userImage}}" class="img-circle" alt = "">
                                     </span> 
                                     <div class="chat-body1">
                                         <span class="chat-name">{{sender}}</span>
@@ -216,7 +217,7 @@
                                                         value="<%= user.username %>">
                                                     <button type="submit" id="friend-add" class="btn add"><i
                                                             class="fa fa-user"></i> Add Friend</button>
-<!-- we added the link to nameLink in the groupchat.js in the public folder -->
+<!-- we added the link to nameLink in the group -->
                                                     <a id="nameLink" class="btn">View Profile</a>
 
                                                     <div id="myTest">
