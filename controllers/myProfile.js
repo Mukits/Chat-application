@@ -11,6 +11,7 @@ module.exports = function(async, Users, Message, aws,friendRequest, formidable){
             router.post('/setup/profile',this.postMyProfileData);
             // route for my summary page
             router.get('/profile/:name', this.mySummaryPage);
+            router.post('profile/:name', this.mySummaryPostPage);
         },
         getMyProfilePage: function(req,res){
             async.parallel([
@@ -206,6 +207,11 @@ module.exports = function(async, Users, Message, aws,friendRequest, formidable){
             res.render('user/mySummary', { title: 'Chat-application - My Summary', user: req.user, data: firstResult, pm: secondResult });
         });
     
+    },
+    //  to allow friend requests and message notification to be responded from the profile page
+    mySummaryPostPage: function (req,res){
+        // params name gets the logged in user
+        friendRequest.PostReq(req,res,'/profile/'+req.params.name);
     }
     }
 }
