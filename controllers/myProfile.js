@@ -127,7 +127,7 @@ module.exports = function(async, Users, Message, aws,friendRequest, formidable){
                     fullname: req.body.fullname,
                     about:req.body.about,
                     country: req.body.country,
-                    userImage: req.body.upload
+                    userImage: req.body.upload.replace("C:\\fakepath\\", "")
                 },
                 {
                     // if the field does not already exist its goin to add it
