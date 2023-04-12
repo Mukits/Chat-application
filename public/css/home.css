@@ -191,8 +191,16 @@ body {
 #reload{
     padding: 0px 15px 0px 15px;
 }
+.dropdown-img{
+    width: 50px;
+    height: 50px;
+}
 
+.thumbn{
+    height:310px;
+    padding-top:20px;
 
+}
 /* ends css for dropdown menu */
 
 

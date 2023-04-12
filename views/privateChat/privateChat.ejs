@@ -41,7 +41,7 @@
 
                                                 </div>
                                                 <div class="user cover-img">
-                                                    <img src="https://placehold.it/300x300" class="img-circle" alt="">
+                                                    <img src="https://chatapplicationmukitur.s3.amazonaws.com/<%= user.userImage.replace("C:\\fakepath\\", "") %>" class="" id="show_img">
                                                 </div>
                                                 <div class="content">
                                                     <div class="main">
@@ -57,7 +57,7 @@
                                                     </div>
                                                     <div class="footer">
                                                         <i class="fa fa-mail-forward"></i>
-                                                        <a href="#" style=" color: #520e79;">
+                                                        <a href="/profile/<%= user.username%>" style=" color: #520e79;">
                                                             View My Profile
                                                         </a>
                                                     </div>

@@ -51,8 +51,15 @@ module.exports = function(async, Users, Message,friendRequest){
 
                         }], function(err,newResult){
                             // it should be returning the newest message between user1 and user2
-                            console.log(newResult);
-                            callback(err,newResult);
+                            const arr = [
+                                {path: 'body.sender', model: 'User'},
+                                {path: 'body.receiver', model: 'User'}
+                            ];
+                            // populating the sender and receiver
+                            Message.populate(newResult,arr,(err,newResult1)=>{
+                                
+                                callback(err,newResult1);
+                            });
                         }
                     )
                 }

@@ -2,7 +2,7 @@ $(document).ready(function(){
     var socket = io();
 
     var paramOne = $.deparam(window.location.pathname);
-
+    var userImg = ('#name-image').val();
     //console.log(paramOne);
     var newParam = paramOne.split('.');
     // whatever at index 0 will be replaced with index 1
