@@ -2,7 +2,7 @@ $(document).ready(function(){
     var socket = io();
 
     var paramOne = $.deparam(window.location.pathname);
-    var userImg = ('#name-image').val();
+    var userImage = $('#name-image').val();
     //console.log(paramOne);
     var newParam = paramOne.split('.');
     // whatever at index 0 will be replaced with index 1
@@ -34,8 +34,8 @@ $(document).ready(function(){
             var template = $('#message-template').html();
             var message = Mustache.render(template, {
                 text: data.text,
-                sender: data.sender
-    
+                sender: data.sender,
+                userImage: data.image.replace("C:\\fakepath\\", "")
     
             });
             // the data from message will be added to the unorderd list in the hmtl page
@@ -52,7 +52,9 @@ $(document).ready(function(){
                 socket.emit('private message',{
                     text: msg,
                     sender:sender,
-                    room: paramOne
+                    room: paramOne,
+                    userImage: userImage
+
                 }, function(){
                     // to clear the input field when message is sent
                     $('#msg').val('');

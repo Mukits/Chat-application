@@ -52,7 +52,7 @@
                                                             Online
                                                         </p>
                                                         <p class="text-center">
-                                                            Status
+                                                            <%= user.about%>
                                                         </p>
                                                     </div>
                                                     <div class="footer">
@@ -131,7 +131,7 @@
                                         
                                         <span class="chat-img1 pull-left">
                                            
-                                            <img src="http://placehold.it/300x300" class="img-circle" alt = "">
+                                            <img src="https://chatapplicationmukitur.s3.amazonaws.com/<%= val.receiver.userImage %>" class="img-circle" id="show_img">
                                         </span> 
                                         <div class="chat-body1">
                                             <span class="chat-name"><%= val.senderName %></span>
@@ -146,7 +146,7 @@
                                         
                                         <span class="chat-img1 pull-left">
                                            
-                                            <img src="http://placehold.it/300x300" class="img-circle" alt = "">
+                                            <img src="https://chatapplicationmukitur.s3.amazonaws.com/<%= val.sender.userImage %>" class="img-circle" id="show_img">
                                         </span> 
                                         <div class="chat-body1">
                                             <span class="chat-name"><%= val.senderName %></span>
@@ -163,7 +163,7 @@
                                         
                                     <span class="chat-img1 pull-left">
                                        
-                                        <img src="http://placehold.it/300x300" class="img-circle" alt = "">
+                                        <img src="https://chatapplicationmukitur.s3.amazonaws.com/{{userImage}}" class="img-circle" id="show_img">
                                     </span> 
                                     <div class="chat-body1">
                                         <span class="chat-name">{{sender}}</span>

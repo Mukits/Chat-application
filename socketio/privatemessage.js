@@ -17,7 +17,8 @@ module.exports = function(io)
             // emits to everyone including sender
             io.to(message.room).emit('new message',{
                 text: message.text,
-                sender: message.sender
+                sender: message.sender,
+                image: message.userImage
             });
 // emits event to all users connected to that private room
             io.emit('message display',{});
