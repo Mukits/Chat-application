@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function(_, passport, User, validator){
+module.exports = function(_, passport, validator){
     
     return {
         SetRouting: function(router){
@@ -12,20 +12,20 @@ module.exports = function(_, passport, User, validator){
             router.get('/auth/google/callback', this.googleLogin);
             
             
-            // router.post('/', User.LoginValidation, this.postLogin);
+            // user login validation
             router.post('/', [
                 validator.check('email').not().isEmpty().isEmail()
-                    .withMessage('Email is invalid'),
+                    .withMessage('Enter a valid email'),
                 validator.check('password').not().isEmpty()
-                    .withMessage('Password is required and must be at least 5 characters.'),
+                    .withMessage('Password must be 5 or more characters'),
             ], this.postValidation, this.postLogin);
-            // router.post('/signup', User.SignUpValidation, this.postSignUp);
+            // user sign up page validation
             router.post('/signup', [
-                validator.check('username').not().isEmpty().isLength({min: 5}).withMessage('Username is required and must be at least 5 characters.'),
+                validator.check('username').not().isEmpty().isLength({min: 3}).withMessage('Username must be at least 3 characters.'),
                 validator.check('email').not().isEmpty().isEmail()
-                    .withMessage('Email is invalid'),
+                    .withMessage('Enter a valid email'),
                 validator.check('password').not().isEmpty()
-                    .withMessage('Password is required and must be at least 5 characters.'),
+                    .withMessage('Password must be 5 or more characters'),
             ], this.postValidation, this.postSignUp);
         },
         
