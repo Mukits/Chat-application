@@ -26,6 +26,8 @@ module.exports = function(_, passport, validator){
                     .withMessage('Enter a valid email'),
                 validator.check('password').not().isEmpty()
                     .withMessage('Password must be 5 or more characters'),
+                validator.check('password').matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i")
+                    .withMessage('Password not complex enough ensure there is: Lowercase, Uppercase, Number and Special Char'),
             ], this.postValidation, this.postSignUp);
         },
         
