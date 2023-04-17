@@ -69,31 +69,7 @@
         <input type="hidden" id="name-image" value="<%= user.userImage %>">
         <div class="">
             <div class="row">
-                <!-- <div class="col-md-3">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="filter-container">
-                                <div class="card">
-                                    <form action="/searchResults" method="post">
-                                        <div class="content">
-                                            <p class="filter">
-                                                FILTER
-                                            </p>
-                                            <hr />
-                                           
-                                            <select class="form-control" name="country" id="country">
-                                                <option value="">Filter By Country</option>
-                                                
-                                            </select>
-                                            <div class="clearfix"></div>
-                                            <button class="btn add-apply">Apply</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
+               
 
                 <div class="col-md-12">
                     <div>
@@ -104,7 +80,7 @@
                                     <% _.forEach(val, function(val2){%>
                                         <form action="/home" method="post" id="addFav">
                                             <div class="item col-md-3">
-                                                <a style="text-decoration:none; " href="#">
+                                                <a style="text-decoration:none; " href="/profile/<%= val2.username %>">
                                                     <div class="thumbnail thumbn ">
                                                         <img src="https://chatapplicationmukitur.s3.amazonaws.com/<%= val2.userImage.replace("C:\\fakepath\\", "") %>" class="img-responsive img-user" id="show_img"
                                                             alt="userImage">

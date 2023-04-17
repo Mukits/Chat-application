@@ -136,10 +136,13 @@ module.exports = function (async, group, _, Users,Message, friendRequest) {
         logout: function(req,res){
             // logout method available through passport
             req.logout();
-            // destroy the user session
+           
             req.session.destroy((err)=>{
                 res.redirect('/');
             });
+            console.log("a user has logged out");
+            console.log("a user session has been destroyed");
+           
         }
     }
 }
