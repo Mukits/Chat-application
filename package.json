@@ -1,5 +1,5 @@
 {
-  "name": "footballkik",
+  "name": "Chat-application",
   "version": "1.0.0",
   "description": "A chat application built with node, mongodb, express and socket.io",
   "main": "index.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/uzochukwueddie/footballkik.git"
+    "url": "git+https://github.com/Mukits/Chat-application.git"
   },
   "author": "Uzochukwu Eddie Odozi",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/uzochukwueddie/footballkik/issues"
+    "url": "https://github.com/Mukits/Chat-application"
   },
-  "homepage": "https://github.com/uzochukwueddie/footballkik#readme",
+  "homepage": "https://github.com/Mukits/Chat-application#readme",
   "dependencies": {
     "async": "^3.1.0",
     "aws-sdk": "^2.488.0",
