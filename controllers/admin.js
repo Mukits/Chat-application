@@ -18,11 +18,14 @@ module.exports = function (formidable, group, aws) {
         },
 
         adminPostPage: function (req, res) {
+            // creating a group object and populating the model by taking the data from the body (dashboard.ejs)
             const newGroup = new group();
             newGroup.name = req.body.group;
             newGroup.country = req.body.country;
             newGroup.image = req.body.upload;
+            // saving the new data
             newGroup.save((err) => {
+                // rendering the dashboard.ejs file
                 res.render('admin/dashboard');
             })
         },

@@ -3,12 +3,19 @@
 module.exports = function(_, passport, validator){
     
     return {
+        // setting up the routes
         SetRouting: function(router){
+            // route for login page
             router.get('/', this.indexPage);
+            // route for signup page
             router.get('/signup', this.getSignUp);
+            // route for facebook login
             router.get('/auth/facebook', this.getFacebookLogin);
+            // route for facebook login callback (the url is described in the google developer account)
             router.get('/auth/facebook/callback', this.facebookLogin);
+            // route for google login
             router.get('/auth/google', this.getGoogleLogin);
+            // route for google login callback (the url is described in the google developer account)
             router.get('/auth/google/callback', this.googleLogin);
             
             
@@ -30,18 +37,18 @@ module.exports = function(_, passport, validator){
                     .withMessage('Password not complex enough ensure there is: Lowercase, Uppercase, Number and Special Char'),
             ], this.postValidation, this.postSignUp);
         },
-        
+        // function for rendering the index page, passing in hasErrors and messages so that they can be used in the index.ejs file
         indexPage: function(req, res){
             const errors = req.flash('error');
             return res.render('index', {title: 'Chat-application - Login', messages: errors, hasErrors: errors.length > 0});
         },
-        
+        // login user through the use of the passport-local.js
         postLogin: passport.authenticate('local.login', {
             successRedirect: '/home',
             failureRedirect: '',
             failureFlash: true
         }),
-        
+        // function for rendering the signup page passing in hasErrors and messages so that they can be used in the singup.ejs file
         getSignUp: function(req, res){
             const errors = req.flash('error');
             return res.render('signup', {title: 'Chat-application - SignUp', messages: errors, hasErrors: errors.length > 0});
@@ -66,7 +73,7 @@ module.exports = function(_, passport, validator){
             }
             return next();
         },
-        
+        // signup user through the use of the passport-local.js
         postSignUp: passport.authenticate('local.signup', {
             successRedirect: '/home',
             failureRedirect: '',
@@ -76,7 +83,7 @@ module.exports = function(_, passport, validator){
         getFacebookLogin: passport.authenticate('facebook', {
         scope: 'email' 
         }),
-        //using URLs  to request permission before the user can signup or
+        
         getGoogleLogin: passport.authenticate('google', {
             scope: ['profile','email']
         }),
